@@ -5,18 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommunicationProtocol"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-    <Grid MaxWidth="800" MinWidth="800" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Border BorderBrush="Black" BorderThickness="1" Margin="0,10,0,0" CornerRadius="8" HorizontalAlignment="Center" Width="749" Height="145" VerticalAlignment="Top">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,526,109" CornerRadius="8,0,8,0" Background="#FF0A003E">
+    <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="406" Margin="0,35,0,0">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,10,0,0" CornerRadius="8" HorizontalAlignment="Center" Width="748" Height="116" VerticalAlignment="Top">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,526,0" CornerRadius="8,0,8,0" Background="#FF0A003E" Height="32" VerticalAlignment="Top">
                 <Label Content="Connection" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
-        <GroupBox Header="Protocol" Margin="34,47,374,33">
-            <Label Content="IP Address" HorizontalAlignment="Right" Margin="0,0,307,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+        <GroupBox Header="Protocol" Margin="34,47,548,0" Height="72" VerticalAlignment="Top">
+            <Label Content="IP Address" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
         </GroupBox>
-        <TextBox HorizontalAlignment="Left" Margin="115,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,1"/>
+        <TextBox HorizontalAlignment="Left" Margin="115,70,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="20" VerticalAlignment="Top"/>
         <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Port" Margin="41,91,0,0"/>
-        <TextBox HorizontalAlignment="Left" Margin="115,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,1"/>
+        <TextBox HorizontalAlignment="Left" Margin="115,95,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="17" VerticalAlignment="Top"/>
+        <GroupBox Header="Encoding" Margin="259,47,350,0" Height="72" VerticalAlignment="Top">
+            <Label Content="Encoding" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+        </GroupBox>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" SelectionChanged="ComboBox_SelectionChanged" Margin="331,69,0,0"/>
+        <GroupBox Header="Protocol" Margin="458,47,184,0" Height="72" VerticalAlignment="Top">
+            <Label Content="Protocol" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+        </GroupBox>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" SelectionChanged="ComboBox_SelectionChanged" Margin="522,68,0,0"/>
+        <Rectangle Margin="0,-35,0,0" Stroke="#FF0A003E" HorizontalAlignment="Center" Width="800" Height="30" VerticalAlignment="Top" Fill="#FF0A003E" MouseDown="Rectangle_MouseDown"/>
     </Grid>
 </Window>
