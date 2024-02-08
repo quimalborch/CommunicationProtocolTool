@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommunicationProtocol"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="385,171,0,0" VerticalAlignment="Top" Height="68" Width="159"/>
-
+        Title="MainWindow" Height="450" Width="800" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+    <Grid MaxWidth="800" MinWidth="800" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,10,0,0" CornerRadius="8" HorizontalAlignment="Center" Width="749" Height="145" VerticalAlignment="Top">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,526,109" CornerRadius="8,0,8,0" Background="#FF0A003E">
+                <Label Content="Connection" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
+            </Border>
+        </Border>
+        <GroupBox Header="Protocol" Margin="34,47,374,33">
+            <Label Content="IP Address" HorizontalAlignment="Right" Margin="0,0,307,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+        </GroupBox>
+        <TextBox HorizontalAlignment="Left" Margin="115,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,1"/>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Port" Margin="41,91,0,0"/>
+        <TextBox HorizontalAlignment="Left" Margin="115,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,1"/>
     </Grid>
 </Window>
