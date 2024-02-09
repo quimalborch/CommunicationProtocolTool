@@ -24,8 +24,10 @@ namespace CommunicationProtocol
     /// </summary>
     public partial class MainWindow : Window
     {
-        public TcpClient tcpServer;
+        public TcpClientClass tcpServer;
         public bool tcpServerActive;
+        public MainWindow ActualInstance;
+
         public class EncodingInfo
         {
             public string Name { get; set; }
@@ -55,6 +57,7 @@ namespace CommunicationProtocol
 
         public MainWindow()
         {
+            ActualInstance = this;
             InitializeComponent();
 
             StartAllTypeEncodings();
@@ -86,16 +89,19 @@ namespace CommunicationProtocol
                     string ControllerMessageValidConnections = String.Empty;
                     if (IsValidConnections(inputIP, inputPort, out ControllerMessageValidConnections))
                     {
-                        tcpServer = new TcpClient();
+                        tcpServer = new TcpClientClass();
 
                         ListComboProtocols.IsEnabled = false;
 
-                        if (tcpServer.Start(inputIP, inputPort, GetActualEncoding()))
+                        if (tcpServer.Start(inputIP, Int32.Parse(inputPort), GetActualEncoding()))
                         {
                             tcpServerActive = true;
                             ButtonConnectConnection.Content = "Disconnect";
                             ButtonSendDataToSocket.IsEnabled = true;
                             TextBoxContentCommands.IsEnabled = true;
+
+                            tcpServer.MessageReceived += TcpClient_MessageReceived;
+
                         } else
                         {
                             ListComboProtocols.IsEnabled = true;
@@ -122,6 +128,20 @@ namespace CommunicationProtocol
             }
 
         }
+
+        private void TcpClient_MessageReceived(object sender, TcpClientClass.MessageReceivedEventArgs e)
+        {
+            try
+            {
+                Dispatcher.Invoke(() => ActualInstance.TextBoxRecivedInformation.Text = ActualInstance.TextBoxRecivedInformation.Text + e.Message);
+                Dispatcher.Invoke(() => ActualInstance.TextBoxRecivedInformation.ScrollToEnd());
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception appropriately
+            }
+        }
+
 
         private Encoding GetActualEncoding()
         {
@@ -296,6 +316,24 @@ namespace CommunicationProtocol
         private void ButtonSendDataToSocket_Click(object sender, RoutedEventArgs e)
         {
             tcpServer.SendMessage(TextBoxContentCommands.Text);
+        }
+
+        private void TextBoxRecivedInformation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBoxRecivedInformation_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBoxRecivedInformation.Text = String.Empty;
+        }
+
+        private void ButtonClearTerminal_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                TextBoxRecivedInformation.Text = String.Empty;
+            }
         }
     }
 }
