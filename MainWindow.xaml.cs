@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,12 +24,14 @@ namespace CommunicationProtocol
     /// </summary>
     public partial class MainWindow : Window
     {
+        public TcpClient tcpServer;
+        public bool tcpServerActive;
         public class EncodingInfo
         {
             public string Name { get; set; }
-            public int Code { get; set; }
+            public System.Text.Encoding Code { get; set; }
 
-            public EncodingInfo(string nombre, int codigo)
+            public EncodingInfo(string nombre, System.Text.Encoding codigo)
             {
                 Name = nombre;
                 Code = codigo;
@@ -57,6 +60,8 @@ namespace CommunicationProtocol
             StartAllTypeEncodings();
             StartAllTypeProtocol();
             StartAllComponent();
+
+            LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
         
@@ -73,16 +78,42 @@ namespace CommunicationProtocol
         {
             try
             {
-                string inputIP = InputIPConnection.Text;
-                string inputPort = InputPORTConnection.Text;
-
-                string ControllerMessageValidConnections = String.Empty;
-                if (IsValidConnections(inputIP, inputPort, out ControllerMessageValidConnections))
+                if (!tcpServerActive)
                 {
+                    string inputIP = InputIPConnection.Text;
+                    string inputPort = InputPORTConnection.Text;
 
+                    string ControllerMessageValidConnections = String.Empty;
+                    if (IsValidConnections(inputIP, inputPort, out ControllerMessageValidConnections))
+                    {
+                        tcpServer = new TcpClient();
+
+                        ListComboProtocols.IsEnabled = false;
+
+                        if (tcpServer.Start(inputIP, inputPort, GetActualEncoding()))
+                        {
+                            tcpServerActive = true;
+                            ButtonConnectConnection.Content = "Disconnect";
+                            ButtonSendDataToSocket.IsEnabled = true;
+                            TextBoxContentCommands.IsEnabled = true;
+                        } else
+                        {
+                            ListComboProtocols.IsEnabled = true;
+                        } 
+                    }
+                    else
+                    {
+                        MessageBox.Show(ControllerMessageValidConnections, "Communication Protocol Tool");
+                    }
                 } else
                 {
-                    MessageBox.Show(ControllerMessageValidConnections, "Communication Protocol Tool");
+                    tcpServer.Stop();
+                    ButtonConnectConnection.Content = "Connect";
+
+                    ListComboProtocols.IsEnabled = true;
+                    TextBoxContentCommands.IsEnabled = false;
+                    ButtonSendDataToSocket.IsEnabled = false;
+                    tcpServerActive = false;
                 }
             }
             catch (Exception ex)
@@ -92,6 +123,19 @@ namespace CommunicationProtocol
 
         }
 
+        private Encoding GetActualEncoding()
+        {
+            try
+            {
+                return Encoding.ASCII;
+            }
+            catch (Exception)
+            {
+                return Encoding.ASCII;
+                throw;
+            }
+        }
+
         #region StartTypeEncodings & Protocols
         private void StartAllTypeEncodings()
         {
@@ -99,8 +143,9 @@ namespace CommunicationProtocol
             {
                 Encodings = new List<EncodingInfo>()
                 {
-                    new EncodingInfo("ASCII", 6),
-                    new EncodingInfo("UTF-8", 8),
+                    new EncodingInfo("ASCII", System.Text.Encoding.ASCII),
+                    new EncodingInfo("UTF-8", System.Text.Encoding.UTF8),
+                    new EncodingInfo("UNICODE", System.Text.Encoding.Unicode),
                 };
 
 
@@ -220,17 +265,18 @@ namespace CommunicationProtocol
             ComboBox comboBox = sender as ComboBox;
             if (comboBox != null && comboBox.SelectedItem != null)
             {
-                int day = 4;
                 switch (comboBox.SelectedItem.ToString())
                 {
                     case "TCP":
                         BorderTextStatusConnection.Visibility = Visibility.Visible;
                         ButtonConnectConnection.Visibility = Visibility.Visible;
+                        ButtonSendDataToSocket.IsEnabled = false;
 
                         break;
                     case "UDP":
                         BorderTextStatusConnection.Visibility = Visibility.Hidden;
                         ButtonConnectConnection.Visibility = Visibility.Hidden;
+                        ButtonSendDataToSocket.IsEnabled = true;
 
                         break;
                     default:
@@ -240,6 +286,16 @@ namespace CommunicationProtocol
                 }
 
             }
+        }
+
+        private void ButtonCloseApplication_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ButtonSendDataToSocket_Click(object sender, RoutedEventArgs e)
+        {
+            tcpServer.SendMessage(TextBoxContentCommands.Text);
         }
     }
 }

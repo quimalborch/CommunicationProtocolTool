@@ -8,7 +8,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        Title="MainWindow" Height="550" Width="800" MinWidth="800" MaxWidth="800" MinHeight="550" MaxHeight="550" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -65,38 +65,107 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TextBoxCommandsStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" Margin="-3,0,0,0">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StackPanelStyleNumContinuous" TargetType="{x:Type StackPanel}"/>
     </Window.Resources>
-    <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="406" Margin="0,35,0,0">
-        <Border BorderBrush="Black" BorderThickness="1" Margin="0,10,0,0" CornerRadius="8" HorizontalAlignment="Center" Width="748" Height="116" VerticalAlignment="Top">
+    <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="515" Margin="0,35,0,0">
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Center" Width="748" Height="116" VerticalAlignment="Top" Margin="0,1,0,0">
             <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,526,0" CornerRadius="8,0,8,0" Background="#FF0A003E" Height="32" VerticalAlignment="Top">
                 <Label Content="Connection" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
-        <GroupBox Header="Protocol" Margin="34,47,548,0" Height="72" VerticalAlignment="Top">
+        <GroupBox Header="Protocol" Margin="34,38,548,0" Height="72" VerticalAlignment="Top">
             <Label Content="IP Address" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
         </GroupBox>
-        <TextBox x:Name="InputIPConnection" HorizontalAlignment="Left" Margin="115,70,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="17" VerticalAlignment="Top"/>
-        <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Port" Margin="41,91,0,0"/>
-        <TextBox x:Name="InputPORTConnection" HorizontalAlignment="Left" Margin="115,96,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="16" VerticalAlignment="Top"/>
-        <GroupBox Header="Encoding" Margin="259,47,350,0" Height="72" VerticalAlignment="Top">
+        <TextBox x:Name="InputIPConnection" HorizontalAlignment="Left" Margin="115,61,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="17" VerticalAlignment="Top"/>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Port" Margin="41,82,0,0"/>
+        <TextBox x:Name="InputPORTConnection" HorizontalAlignment="Left" Margin="115,87,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="16" VerticalAlignment="Top"/>
+        <GroupBox Header="Encoding" Margin="259,38,350,0" Height="72" VerticalAlignment="Top">
             <Label Content="Encoding" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
         </GroupBox>
-        <ComboBox x:Name="ListComboEncodings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Margin="331,69,0,0"/>
-        <GroupBox Header="Protocol" Margin="458,47,184,0" Height="72" VerticalAlignment="Top">
+        <ComboBox x:Name="ListComboEncodings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Margin="331,60,0,0"/>
+        <GroupBox Header="Protocol" Margin="458,38,184,0" Height="72" VerticalAlignment="Top">
             <Label Content="Protocol" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
         </GroupBox>
-        <ComboBox x:Name="ListComboProtocols" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="522,68,0,0" SelectionChanged="ListComboProtocolsChanged"/>
+        <ComboBox x:Name="ListComboProtocols" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="522,59,0,0" SelectionChanged="ListComboProtocolsChanged"/>
         <Rectangle Margin="0,-35,0,0" Stroke="#FF0A003E" HorizontalAlignment="Center" Width="800" Height="30" VerticalAlignment="Top" Fill="#FF0A003E" MouseDown="Rectangle_MouseDown"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="757,-35,0,411" Width="43" BorderBrush="#00707070">
+        <Button x:Name="ButtonCloseApplication" Content="" HorizontalAlignment="Left" Margin="757,-35,0,411" Width="43" BorderBrush="#00707070" Click="ButtonCloseApplication_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/x-svg.png" Stretch="Uniform" TileMode="None"/>
             </Button.Background>
         </Button>
         <Label Content="Communication Protocol Tool" Margin="0,-35,0,0" Height="31" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="175"/>
-        <Button x:Name="ButtonConnectConnection" Style="{DynamicResource ButtonPlayPause}" Content="Connect" HorizontalAlignment="Left" Margin="626,91,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonConnectConnection_Click"/>
-        <Border x:Name="BorderTextStatusConnection" BorderBrush="Black" BorderThickness="1" Margin="626,56,40,320" CornerRadius="3,3,3,3">
+        <Button x:Name="ButtonConnectConnection" Style="{DynamicResource ButtonPlayPause}" Content="Connect" HorizontalAlignment="Left" Margin="626,82,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonConnectConnection_Click"/>
+        <Border x:Name="BorderTextStatusConnection" BorderBrush="Black" BorderThickness="1" Margin="626,47,40,0" CornerRadius="3,3,3,3" Height="30" VerticalAlignment="Top">
             <Label x:Name="TextStatusConnection" Content="Disconnected" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="26,128,26,0" CornerRadius="8,8,8,8" Height="135" VerticalAlignment="Top">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,526,0" CornerRadius="8,0,8,0" Background="#FF0A003E" Height="32" VerticalAlignment="Top">
+                <Label Content="Commands" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
+            </Border>
+        </Border>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="34,167,548,0" Height="86" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False" ColumnHeaderStringFormat="">
+                    <GridViewColumn HeaderStringFormat=""/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="TextBoxContentCommands" Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="264,138,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="352" Height="116" AcceptsReturn="True" IsEnabled="False"/>
+        <Button x:Name="ButtonSendDataToSocket" Style="{DynamicResource ButtonPlayPause}" Content="Send 📩" HorizontalAlignment="Left" Margin="626,226,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonSendDataToSocket_Click" IsEnabled="False"/>
+        <Button x:Name="ButtonConnectConnection_Copy1" Style="{DynamicResource ButtonPlayPause}" Content="Continuous" HorizontalAlignment="Left" Margin="626,200,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="21" Background="#FF0A003E" Foreground="White" FontSize="9"/>
+        <Label x:Name="LabelVersionCommunicationProtocol" Content="Version: 1.0.0" HorizontalAlignment="Right" Margin="0,478,10,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FF909090"/>
+        <Label Content="Quim Alborch. MIT License" HorizontalAlignment="Right" Margin="0,478,601,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FF909090" Width="189"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="26,274,26,0" CornerRadius="8,8,8,8" Height="199" VerticalAlignment="Top">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,526,0" CornerRadius="8,0,8,0" Background="#FF0A003E" Height="32" VerticalAlignment="Top">
+                <Label Content="Commands" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
+            </Border>
+        </Border>
+        <TextBox Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="38,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="473" Height="152" Background="WhiteSmoke" Foreground="Black" SelectionBrush="White"/>
+
 
     </Grid>
 </Window>
