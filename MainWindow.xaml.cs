@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,6 +30,7 @@ namespace CommunicationProtocol
         public TcpClientClass tcpServer;
         public bool tcpServerActive;
         public MainWindow ActualInstance;
+        public RootSessions ListSessions;
 
         #region Class Session
         public class Answer
@@ -400,14 +402,8 @@ namespace CommunicationProtocol
                 string fileText = File.ReadAllText(filePath);
                 RootSessions ListRootSessions = JsonConvert.DeserializeObject<RootSessions>(fileText);
 
-                List<string> ListNameSessions = new List<string>();
-
-                for (global::System.Int32 i = 0; i < ListRootSessions.Sessions.Count; i++)
-                {
-                    ListNameSessions.Add(ListRootSessions.Sessions[i].NameSession);
-                }
-
-                ListBoxSessions.ItemsSource = ListNameSessions;
+                ListSessions = ListRootSessions;
+                UpdateListSessions();
             }
             catch (Exception)
             {
@@ -418,14 +414,209 @@ namespace CommunicationProtocol
         private void ButtonSaveSession_Click(object sender, RoutedEventArgs e)
         {
             string NewSessionName = TextBoxNameSavedSession.Text;
+            if (ListBoxSessions.SelectedItem == null)
+            {
+                if (ListSessions.Sessions.Any(x => x.NameSession == NewSessionName))
+                {
+                    MessageBox.Show("El nombre de la sesión ya existe, por favor seleccione otro nombre.", "Communication Protocol Tool");
+                    return;
+                }
+            } else
+            {
+                NewSessionName = ListBoxSessions.SelectedItem.ToString();
+            }
 
-            RootSessions rootSessions = new RootSessions();
-            rootSessions.Sessions = new List<Session>();
-            rootSessions.Sessions.Add(new Session
+            if (ListSessions.Sessions.Any(x => x.NameSession == NewSessionName))
+            {
+                ListSessions.Sessions.RemoveAll(x => x.NameSession == NewSessionName);
+            }
+
+            string Encoding = String.Empty;
+            string Protocol = String.Empty;
+            if (ListComboEncodings.SelectedItem != null)
+            {
+                Encoding = ListComboEncodings.SelectedItem.ToString();
+            }
+
+            if (ListComboProtocols.SelectedItem != null)
+            {
+                Protocol = ListComboProtocols.SelectedItem.ToString();
+            }
+
+            Session Session = (new Session
             {
                 NameSession = NewSessionName,
+                Answer = new Answer
+                {
+                    AnswerTextBox = TextBoxRecivedInformation.Text
+                },
+                Commands = new Commands
+                {
+                    SelectedCommand = "",
+                    ActualText = TextBoxContentCommands.Text
+                },
+                Connection = new Connection
+                {
+                    IP = InputIPConnection.Text,
+                    PORT = InputPORTConnection.Text,
+                    ENCODING = Encoding,
+                    Protocol = Protocol
+                }
             });
+            
+            if (ListSessions == null)
+            {
+                ListSessions = new RootSessions();
+            }
+
+            ListSessions.Sessions.Add(Session);
+
+            UpdateListSessions();
+            SaveSessionsInConfFile();
+        }
+
+        private void SaveSessionsInConfFile()
+        {
+            try
+            {
+                //pass the ListSessions to json
+                string json = JsonConvert.SerializeObject(ListSessions);
+
+                string filePath = @"C:\UBS\CommunicationProtocolTool.conf";
+                if (!File.Exists(filePath))
+                {
+                    if (!Directory.Exists(System.IO.Path.GetDirectoryName(filePath)))
+                    {
+                        Directory.CreateDirectory(System.IO.Path.GetDirectoryName(filePath));
+                    }
+
+                    if (!File.Exists(filePath))
+                    {
+                        File.Create(filePath).Close();
+                        File.WriteAllText(filePath, "{}");
+                    }
+                }
+
+                File.WriteAllText(filePath, json);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void UpdateListSessions()
+        {
+            try
+            {
+                List<string> ListNameSessions = new List<string>();
+                for (global::System.Int32 i = 0; i < ListSessions.Sessions.Count; i++)
+                {
+                    ListNameSessions.Add(ListSessions.Sessions[i].NameSession);
+                }
+
+                ListBoxSessions.ItemsSource = ListNameSessions;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion
+
+        private void ButtonDeleteSession_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ListBoxSessions.SelectedItem == null)
+                {
+                    return;
+                }
+
+                string SelectedSession = ListBoxSessions.SelectedItem.ToString();
+
+                ListSessions.Sessions.RemoveAll(x => x.NameSession == SelectedSession);
+                UpdateListSessions();
+                SaveSessionsInConfFile();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void ButtonLoadSession_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string SelectedSession = String.Empty;
+                if (!GetSelectedSession(out SelectedSession))
+                {
+                    return;
+                }
+
+                Session Session = ListSessions.Sessions.FirstOrDefault(x => x.NameSession == SelectedSession);
+                if (Session == null)
+                {
+                       return;
+                }
+
+                TextBoxNameSavedSession.Text = Session.NameSession;
+                TextBoxContentCommands.Text = Session.Commands.ActualText;
+                TextBoxRecivedInformation.Text = Session.Answer.AnswerTextBox;
+                InputIPConnection.Text = Session.Connection.IP;
+                InputPORTConnection.Text = Session.Connection.PORT;
+
+                if (ListComboEncodings.Items.Contains(Session.Connection.ENCODING))
+                {
+                    ListComboEncodings.SelectedItem = Session.Connection.ENCODING;
+                }
+
+                if (ListComboProtocols.Items.Contains(Session.Connection.Protocol))
+                {
+                    ListComboProtocols.SelectedItem = Session.Connection.Protocol;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private bool GetSelectedSession(out string NameSelectedSession)
+        {
+            NameSelectedSession = String.Empty;
+            try
+            {
+                if (ListBoxSessions.SelectedItem == null)
+                {
+                    return false;
+                }
+
+                NameSelectedSession = ListBoxSessions.SelectedItem.ToString();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private void TextBoxNameSavedSession_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                ListBoxSessions.SelectedItem = null;
+            }
+        }
+
+        private void TextBoxNameSavedSession_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

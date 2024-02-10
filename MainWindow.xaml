@@ -233,10 +233,10 @@
         <Image HorizontalAlignment="Left" Height="18" Margin="7,-29,0,0" VerticalAlignment="Top" Width="18" Source="/logo.ico"/>
         <GroupBox Header="Load, save or delete a stored sessions" Margin="537,308,35,50"/>
         <Label Content="Saved Sessions" HorizontalAlignment="Left" Margin="542,324,0,0" VerticalAlignment="Top" Height="27"/>
-        <TextBox x:Name="TextBoxNameSavedSession" HorizontalAlignment="Left" Margin="545,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
-        <Button x:Name="ButtonLoadSession" Content="Load" Margin="687,373,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White"/>
+        <TextBox x:Name="TextBoxNameSavedSession" HorizontalAlignment="Left" Margin="545,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" MouseDown="TextBoxNameSavedSession_MouseDown" MouseLeftButtonUp="TextBoxNameSavedSession_MouseLeftButtonUp"/>
+        <Button x:Name="ButtonLoadSession" Content="Load" Margin="687,373,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White" Click="ButtonLoadSession_Click"/>
         <Button x:Name="ButtonSaveSession" Content="Save" Margin="687,402,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White" Click="ButtonSaveSession_Click"/>
-        <Button x:Name="ButtonDeleteSession" Content="Delete" Margin="687,431,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White"/>
+        <Button x:Name="ButtonDeleteSession" Content="Delete" Margin="687,431,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White" Click="ButtonDeleteSession_Click"/>
         <ListBox x:Name="ListBoxSessions" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="545,374,116,58"/>
 
 
