@@ -172,7 +172,7 @@
                 <Label Content="Connection" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
-        <GroupBox Header="Protocol" Margin="34,38,548,0" Height="72" VerticalAlignment="Top">
+        <GroupBox Header="Connection" Margin="34,38,548,0" Height="72" VerticalAlignment="Top">
             <Label Content="IP Address" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
         </GroupBox>
         <TextBox x:Name="InputIPConnection" HorizontalAlignment="Left" Margin="115,61,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="17" VerticalAlignment="Top" Text="127.0.0.1"/>
@@ -235,23 +235,9 @@
         <Label Content="Saved Sessions" HorizontalAlignment="Left" Margin="542,324,0,0" VerticalAlignment="Top" Height="27"/>
         <TextBox x:Name="TextBoxNameSavedSession" HorizontalAlignment="Left" Margin="545,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
         <Button x:Name="ButtonLoadSession" Content="Load" Margin="687,373,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White"/>
-        <Button x:Name="ButtonSaveSession" Content="Save" Margin="687,402,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White"/>
+        <Button x:Name="ButtonSaveSession" Content="Save" Margin="687,402,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White" Click="ButtonSaveSession_Click"/>
         <Button x:Name="ButtonDeleteSession" Content="Delete" Margin="687,431,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White"/>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="545,372,116,58" RenderTransformOrigin="0.5,0.5">
-            <ListView.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.149"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListView.RenderTransform>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ListBox x:Name="ListBoxSessions" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="545,374,116,58"/>
 
 
     </Grid>

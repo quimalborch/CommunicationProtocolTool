@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -27,6 +29,40 @@ namespace CommunicationProtocol
         public TcpClientClass tcpServer;
         public bool tcpServerActive;
         public MainWindow ActualInstance;
+
+        #region Class Session
+        public class Answer
+        {
+            public string AnswerTextBox { get; set; }
+        }
+
+        public class Commands
+        {
+            public string SelectedCommand { get; set; }
+            public string ActualText { get; set; }
+        }
+
+        public class Connection
+        {
+            public string IP { get; set; }
+            public string PORT { get; set; }
+            public string ENCODING { get; set; }
+            public string Protocol { get; set; }
+        }
+
+        public class RootSessions
+        {
+            public List<Session> Sessions { get; set; }
+        }
+
+        public class Session
+        {
+            public string NameSession { get; set; }
+            public Connection Connection { get; set; }
+            public Commands Commands { get; set; }
+            public Answer Answer { get; set; }
+        }
+        #endregion
 
         public class EncodingInfo
         {
@@ -63,11 +99,12 @@ namespace CommunicationProtocol
             StartAllTypeEncodings();
             StartAllTypeProtocol();
             StartAllComponent();
+            StartLocalSessions();
 
             LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
-        
+
 
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -102,16 +139,18 @@ namespace CommunicationProtocol
 
                             tcpServer.MessageReceived += TcpClient_MessageReceived;
 
-                        } else
+                        }
+                        else
                         {
                             ListComboProtocols.IsEnabled = true;
-                        } 
+                        }
                     }
                     else
                     {
                         MessageBox.Show(ControllerMessageValidConnections, "Communication Protocol Tool");
                     }
-                } else
+                }
+                else
                 {
                     tcpServer.Stop();
                     ButtonConnectConnection.Content = "Connect";
@@ -232,7 +271,8 @@ namespace CommunicationProtocol
                     if (inputPort != String.Empty)
                     {
                         MessageErrors.Add("El puerto seleccionado no está en un formato valido.");
-                    } else
+                    }
+                    else
                     {
                         MessageErrors.Add("El puerto no puede estar vacio.");
                     }
@@ -335,6 +375,57 @@ namespace CommunicationProtocol
                 TextBoxRecivedInformation.Text = String.Empty;
             }
         }
+
+
+        #region Manage Sessions
+        private void StartLocalSessions()
+        {
+            try
+            {
+                string filePath = @"C:\UBS\CommunicationProtocolTool.conf";
+                if (!File.Exists(filePath))
+                {
+                    if (!Directory.Exists(System.IO.Path.GetDirectoryName(filePath)))
+                    {
+                        Directory.CreateDirectory(System.IO.Path.GetDirectoryName(filePath));
+                    }
+
+                    if (!File.Exists(filePath))
+                    {
+                        File.Create(filePath).Close();
+                        File.WriteAllText(filePath, "{}");
+                    }
+                }
+
+                string fileText = File.ReadAllText(filePath);
+                RootSessions ListRootSessions = JsonConvert.DeserializeObject<RootSessions>(fileText);
+
+                List<string> ListNameSessions = new List<string>();
+
+                for (global::System.Int32 i = 0; i < ListRootSessions.Sessions.Count; i++)
+                {
+                    ListNameSessions.Add(ListRootSessions.Sessions[i].NameSession);
+                }
+
+                ListBoxSessions.ItemsSource = ListNameSessions;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private void ButtonSaveSession_Click(object sender, RoutedEventArgs e)
+        {
+            string NewSessionName = TextBoxNameSavedSession.Text;
+
+            RootSessions rootSessions = new RootSessions();
+            rootSessions.Sessions = new List<Session>();
+            rootSessions.Sessions.Add(new Session
+            {
+                NameSession = NewSessionName,
+            });
+        }
+        #endregion
     }
 }
- 
