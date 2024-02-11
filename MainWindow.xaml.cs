@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Deployment.Application;
+using System.Threading;
 
 
 namespace CommunicationProtocol
@@ -30,10 +31,11 @@ namespace CommunicationProtocol
     public partial class MainWindow : Window
     {
         public TcpClientClass tcpServer;
-        public bool tcpServerActive;
+        public bool tcpClientActive;
         public MainWindow ActualInstance;
         public RootSessions ListSessions;
         UdpClientClass udpClient = new UdpClientClass();
+        Thread ThreadConnectionClientTCP;
 
         #region Class Session
         public class Answer
@@ -123,7 +125,7 @@ namespace CommunicationProtocol
         {
             try
             {
-                if (!tcpServerActive)
+                if (!tcpClientActive)
                 {
                     string inputIP = InputIPConnection.Text;
                     string inputPort = InputPORTConnection.Text;
@@ -131,24 +133,14 @@ namespace CommunicationProtocol
                     string ControllerMessageValidConnections = String.Empty;
                     if (IsValidConnections(inputIP, inputPort, out ControllerMessageValidConnections))
                     {
-                        tcpServer = new TcpClientClass();
-
-                        ListComboProtocols.IsEnabled = false;
-
-                        if (tcpServer.Start(inputIP, Int32.Parse(inputPort), GetActualEncoding()))
+                        if (ThreadConnectionClientTCP != null && ThreadConnectionClientTCP.IsAlive)
                         {
-                            tcpServerActive = true;
-                            ButtonConnectConnection.Content = "Disconnect";
-                            ButtonSendDataToSocket.IsEnabled = true;
-                            TextBoxContentCommands.IsEnabled = true;
-
-                            tcpServer.MessageReceived += TcpClient_MessageReceived;
-
+                            ThreadConnectionClientTCP.Abort();
                         }
-                        else
-                        {
-                            ListComboProtocols.IsEnabled = true;
-                        }
+
+                        //make a thread
+                        ThreadConnectionClientTCP = new Thread(() => StartConnectionTCPClientThread(inputIP, inputPort));
+                        ThreadConnectionClientTCP.Start();
                     }
                     else
                     {
@@ -161,9 +153,15 @@ namespace CommunicationProtocol
                     ButtonConnectConnection.Content = "Connect";
 
                     ListComboProtocols.IsEnabled = true;
-                    TextBoxContentCommands.IsEnabled = false;
                     ButtonSendDataToSocket.IsEnabled = false;
-                    tcpServerActive = false;
+
+                    InputIPConnection.IsEnabled = true;
+                    InputPORTConnection.IsEnabled = true;
+                    ListComboEncodings.IsEnabled = true;
+
+                    BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+
+                    tcpClientActive = false;
                 }
             }
             catch (Exception ex)
@@ -171,6 +169,51 @@ namespace CommunicationProtocol
                 MessageBox.Show("Connection failed: " + ex.Message);
             }
 
+        }
+
+        private void StartConnectionTCPClientThread(string inputIP, string inputPort)
+        {
+            try
+            {
+                tcpServer = new TcpClientClass();
+
+                //ListComboProtocols The calling thread cannot access this object because a different thread owns it
+                InputIPConnection.Dispatcher.Invoke(() => InputIPConnection.IsEnabled = false);
+                InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = false);
+                ListComboProtocols.Dispatcher.Invoke(() => ListComboProtocols.IsEnabled = false);
+                ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = false);
+                ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = false);
+
+                if (tcpServer.Start(inputIP, Int32.Parse(inputPort), GetActualEncoding()))
+                {
+                    tcpClientActive = true;
+
+                    ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.Content = "🛑 Disconnect");
+                    ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
+                    ButtonSendDataToSocket.Dispatcher.Invoke(() => ButtonSendDataToSocket.IsEnabled = true);
+
+                    //rgba 230, 255, 0, 30%
+                    BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(50, 230, 250, 0)));
+
+                    tcpServer.MessageReceived += TcpClient_MessageReceived;
+
+                }
+                else
+                {
+                    ListComboProtocols.Dispatcher.Invoke(() => ListComboProtocols.IsEnabled = true);
+                    ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
+                    ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = true);
+                    InputIPConnection.Dispatcher.Invoke(() => InputIPConnection.IsEnabled = true);
+                    InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = true);
+
+                    BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromRgb(200, 108, 108)));
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void TcpClient_MessageReceived(object sender, TcpClientClass.MessageReceivedEventArgs e)
@@ -191,9 +234,14 @@ namespace CommunicationProtocol
         {
             try
             {
-                if (ListComboEncodings.SelectedItem != null)
+                //ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = false);
+                object SelectedItem_ListComboEncodings = null;
+                ListComboEncodings.Dispatcher.Invoke(() => SelectedItem_ListComboEncodings = ListComboEncodings.SelectedItem);
+
+                if (SelectedItem_ListComboEncodings != null)
                 {
-                    string SelectedEncoding = ListComboEncodings.SelectedItem.ToString();
+                    string SelectedEncoding = SelectedItem_ListComboEncodings.ToString();
+
                     EncodingInfo Encoding = Encodings.FirstOrDefault(x => x.Name == SelectedEncoding);
                     return Encoding.Code;
                 }
@@ -374,7 +422,7 @@ namespace CommunicationProtocol
 
             if (ListComboProtocols.SelectedItem.ToString() == "TCP")
             {
-                if (tcpServerActive)
+                if (tcpClientActive)
                 {
                     tcpServer.SendMessage(TextBoxContentCommands.Text);
                 }
