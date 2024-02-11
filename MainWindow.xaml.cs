@@ -33,6 +33,7 @@ namespace CommunicationProtocol
         public bool tcpServerActive;
         public MainWindow ActualInstance;
         public RootSessions ListSessions;
+        UdpClientClass udpClient = new UdpClientClass();
 
         #region Class Session
         public class Answer
@@ -190,12 +191,18 @@ namespace CommunicationProtocol
         {
             try
             {
+                if (ListComboEncodings.SelectedItem != null)
+                {
+                    string SelectedEncoding = ListComboEncodings.SelectedItem.ToString();
+                    EncodingInfo Encoding = Encodings.FirstOrDefault(x => x.Name == SelectedEncoding);
+                    return Encoding.Code;
+                }
+
                 return Encoding.ASCII;
             }
             catch (Exception)
             {
                 return Encoding.ASCII;
-                throw;
             }
         }
 
@@ -359,7 +366,24 @@ namespace CommunicationProtocol
 
         private void ButtonSendDataToSocket_Click(object sender, RoutedEventArgs e)
         {
-            tcpServer.SendMessage(TextBoxContentCommands.Text);
+            //check if the list of protocols is tcp or udp or empty
+            if (ListComboProtocols.SelectedItem == null)
+            {
+                return;
+            }
+
+            if (ListComboProtocols.SelectedItem.ToString() == "TCP")
+            {
+                if (tcpServerActive)
+                {
+                    tcpServer.SendMessage(TextBoxContentCommands.Text);
+                }
+            }
+            
+            if (ListComboProtocols.SelectedItem.ToString() == "UDP")
+            {
+                udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text);
+            }
         }
 
         private void TextBoxRecivedInformation_TextChanged(object sender, TextChangedEventArgs e)
