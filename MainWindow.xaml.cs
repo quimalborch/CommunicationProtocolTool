@@ -103,7 +103,12 @@ namespace CommunicationProtocol
             StartAllComponent();
             StartLocalSessions();
 
-            LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            //LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+
+            var assembly = Assembly.GetExecutingAssembly();
+            var version = assembly.GetName().Version;
+            var stringVersion = version.ToString();
+            LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", stringVersion);
         }
 
 
