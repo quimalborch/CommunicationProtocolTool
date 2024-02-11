@@ -108,7 +108,7 @@ namespace CommunicationProtocol
             StartAllComponent();
             StartLocalSessions();
 
-            LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
 
@@ -158,6 +158,8 @@ namespace CommunicationProtocol
                     InputIPConnection.IsEnabled = true;
                     InputPORTConnection.IsEnabled = true;
                     ListComboEncodings.IsEnabled = true;
+                    ButtonLoadSession.IsEnabled = true;
+                    TextStatusConnection.Content = "Disconnected";
 
                     BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
@@ -189,6 +191,9 @@ namespace CommunicationProtocol
                     tcpClientActive = true;
 
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.Content = "🛑 Disconnect");
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connected");
+
+                    ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = false);
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
                     ButtonSendDataToSocket.Dispatcher.Invoke(() => ButtonSendDataToSocket.IsEnabled = true);
 
@@ -204,9 +209,12 @@ namespace CommunicationProtocol
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
                     ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = true);
                     InputIPConnection.Dispatcher.Invoke(() => InputIPConnection.IsEnabled = true);
+                    ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = true);
                     InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = true);
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "⚠ Disconnected");
 
-                    BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromRgb(200, 108, 108)));
+
+                    BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(100 ,200, 108, 108)));
                 }
             }
             catch (Exception)
