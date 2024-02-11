@@ -411,24 +411,64 @@ namespace CommunicationProtocol
                 throw;
             }
         }
-        private void ButtonSaveSession_Click(object sender, RoutedEventArgs e)
+        private void UpdateSessionSave(string SessionName)
         {
-            string NewSessionName = TextBoxNameSavedSession.Text;
-            if (ListBoxSessions.SelectedItem == null)
+            try
             {
-                if (ListSessions.Sessions.Any(x => x.NameSession == NewSessionName))
+                //get session named with the SessionName
+                Session Session = ListSessions.Sessions.FirstOrDefault(x => x.NameSession == SessionName);
+                if (Session == null)
                 {
-                    MessageBox.Show("El nombre de la sesión ya existe, por favor seleccione otro nombre.", "Communication Protocol Tool");
                     return;
                 }
-            } else
+
+                Session.Connection.IP = InputIPConnection.Text;
+                Session.Connection.PORT = InputPORTConnection.Text;
+
+
+                string Encoding = String.Empty;
+                string Protocol = String.Empty;
+                if (ListComboEncodings.SelectedItem != null)
+                {
+                    Session.Connection.ENCODING = ListComboEncodings.SelectedItem.ToString();
+                }
+
+                if (ListComboProtocols.SelectedItem != null)
+                {
+                    Session.Connection.Protocol = ListComboProtocols.SelectedItem.ToString();
+                }
+
+                Session.Commands.ActualText = TextBoxContentCommands.Text;
+                Session.Answer.AnswerTextBox = TextBoxRecivedInformation.Text;
+
+                SaveSessionsInConfFile();
+            }
+            catch (Exception ex)
             {
+
+                throw;
+            }
+        }
+        private void ButtonSaveSession_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxSessions.SelectedItem = null;
+
+            string NewSessionName = TextBoxNameSavedSession.Text;
+
+            if (NewSessionName == String.Empty)
+            {
+                if (ListBoxSessions.SelectedItem == null)
+                {
+                    return;
+                }
+
                 NewSessionName = ListBoxSessions.SelectedItem.ToString();
             }
 
             if (ListSessions.Sessions.Any(x => x.NameSession == NewSessionName))
             {
-                ListSessions.Sessions.RemoveAll(x => x.NameSession == NewSessionName);
+                UpdateSessionSave(NewSessionName);
+                return;
             }
 
             string Encoding = String.Empty;
@@ -561,7 +601,7 @@ namespace CommunicationProtocol
                 Session Session = ListSessions.Sessions.FirstOrDefault(x => x.NameSession == SelectedSession);
                 if (Session == null)
                 {
-                       return;
+                    return;
                 }
 
                 TextBoxNameSavedSession.Text = Session.NameSession;
@@ -573,11 +613,17 @@ namespace CommunicationProtocol
                 if (ListComboEncodings.Items.Contains(Session.Connection.ENCODING))
                 {
                     ListComboEncodings.SelectedItem = Session.Connection.ENCODING;
+                } else
+                {
+                    ListComboEncodings.SelectedItem = null;
                 }
 
                 if (ListComboProtocols.Items.Contains(Session.Connection.Protocol))
                 {
                     ListComboProtocols.SelectedItem = Session.Connection.Protocol;
+                } else
+                {
+                    ListComboProtocols.SelectedItem = null;
                 }
             }
             catch (Exception)
