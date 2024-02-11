@@ -19,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Deployment.Application;
+
 
 namespace CommunicationProtocol
 {
@@ -103,12 +105,7 @@ namespace CommunicationProtocol
             StartAllComponent();
             StartLocalSessions();
 
-            //LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var version = assembly.GetName().Version;
-            var stringVersion = version.ToString();
-            LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", stringVersion);
+            LabelVersionCommunicationProtocol.Content = string.Format("Versión: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
 

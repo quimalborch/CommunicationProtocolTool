@@ -209,7 +209,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="TextBoxContentCommands" Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="264,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" Height="116" AcceptsReturn="True" IsEnabled="False"/>
+        <TextBox x:Name="TextBoxContentCommands" Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="264,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" Height="116" AcceptsReturn="True"/>
         <Button x:Name="ButtonSendDataToSocket" Style="{DynamicResource ButtonPlayPause}" Content="Send 📩" HorizontalAlignment="Left" Margin="626,226,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonSendDataToSocket_Click" IsEnabled="False"/>
         <Button x:Name="ButtonConnectConnection_Copy1" Style="{DynamicResource ButtonPlayPause}" Content="Continuous" HorizontalAlignment="Left" Margin="626,200,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="21" Background="#FF0A003E" Foreground="White" FontSize="9"/>
         <Label x:Name="LabelVersionCommunicationProtocol" Content="Version: 1.0.0" HorizontalAlignment="Right" Margin="0,478,10,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FF909090"/>
