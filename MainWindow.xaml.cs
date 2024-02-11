@@ -417,7 +417,26 @@ namespace CommunicationProtocol
 
         private void ButtonCloseApplication_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                //close ThreadConnectionClientTCP
+                if (ThreadConnectionClientTCP != null && ThreadConnectionClientTCP.IsAlive)
+                {
+                    ThreadConnectionClientTCP.Abort();
+                }
+
+                if (tcpServer != null)
+                {
+                    tcpServer.Stop();
+                }
+
+                Application.Current.Shutdown();
+            }
+            catch (Exception)
+            {
+                Application.Current.Shutdown();
+            }
+
         }
 
         private void ButtonSendDataToSocket_Click(object sender, RoutedEventArgs e)
@@ -743,6 +762,11 @@ namespace CommunicationProtocol
         }
 
         private void TextBoxNameSavedSession_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
