@@ -400,6 +400,8 @@
         <Image HorizontalAlignment="Left" Height="5" Margin="680,186,0,0" VerticalAlignment="Top" Width="8" Source="/ArrowDown.png"/>
         <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonDownNumberContinuous" Content="" HorizontalAlignment="Left" Margin="674,182,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="Transparent" Foreground="White" Click="ButtonDownNumberContinuous_Click"/>
         <Label Content="secs." HorizontalAlignment="Left" Margin="696,180,0,0" VerticalAlignment="Top" Width="54" Height="22" FontSize="9"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="720,-33,0,0" VerticalAlignment="Top" Width="26" Source="/help.png"/>
+        <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="ButtonCloseApplication_Copy" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Click="ButtonCloseApplication_Click" Background="{x:Null}" RenderTransformOrigin="0.503,0.708"/>
 
 
     </Grid>

@@ -159,7 +159,7 @@ namespace CommunicationProtocol
 
                     InputIPConnection.IsEnabled = true;
                     InputPORTConnection.IsEnabled = true;
-                    ListComboEncodings.IsEnabled = true;
+                    //ListComboEncodings.IsEnabled = true;
                     ButtonLoadSession.IsEnabled = true;
                     TextStatusConnection.Content = "Disconnected";
 
@@ -175,6 +175,22 @@ namespace CommunicationProtocol
 
         }
 
+        private void AttemptToConnectTCPAnimation()
+        {
+            //make a loop for 1 second
+            while (true)
+            {
+                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting.");
+                Thread.Sleep(250);
+                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting..");
+                Thread.Sleep(250);
+                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting...");
+                Thread.Sleep(250);
+                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting....");
+                Thread.Sleep(250);
+            }
+        }
+
         private void StartConnectionTCPClientThread(string inputIP, string inputPort)
         {
             try
@@ -186,10 +202,18 @@ namespace CommunicationProtocol
                 InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = false);
                 ListComboProtocols.Dispatcher.Invoke(() => ListComboProtocols.IsEnabled = false);
                 ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = false);
-                ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = false);
+                //ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = false);
 
-                if (tcpServer.Start(inputIP, Int32.Parse(inputPort), GetActualEncoding()))
+                Thread ThreadAttemptToConnectTCPAnimation = new Thread(() => AttemptToConnectTCPAnimation());
+                ThreadAttemptToConnectTCPAnimation.Start();
+
+                if (tcpServer.Start(inputIP, Int32.Parse(inputPort), GetActualEncoding(), this))
                 {
+                    if (ThreadAttemptToConnectTCPAnimation != null && ThreadAttemptToConnectTCPAnimation.IsAlive)
+                    {
+                        ThreadAttemptToConnectTCPAnimation.Abort();
+                    }
+
                     tcpClientActive = true;
 
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.Content = "🛑 Disconnect");
@@ -208,9 +232,14 @@ namespace CommunicationProtocol
                 }
                 else
                 {
+                    if (ThreadAttemptToConnectTCPAnimation != null && ThreadAttemptToConnectTCPAnimation.IsAlive)
+                    {
+                        ThreadAttemptToConnectTCPAnimation.Abort();
+                    }
+
                     ListComboProtocols.Dispatcher.Invoke(() => ListComboProtocols.IsEnabled = true);
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
-                    ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = true);
+                    //ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = true);
                     InputIPConnection.Dispatcher.Invoke(() => InputIPConnection.IsEnabled = true);
                     ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = true);
                     InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = true);
@@ -241,7 +270,7 @@ namespace CommunicationProtocol
         }
 
 
-        private Encoding GetActualEncoding()
+        public Encoding GetActualEncoding()
         {
             try
             {
@@ -401,12 +430,14 @@ namespace CommunicationProtocol
                         BorderTextStatusConnection.Visibility = Visibility.Visible;
                         ButtonConnectConnection.Visibility = Visibility.Visible;
                         ButtonSendDataToSocket.IsEnabled = false;
+                        ButtonLoopContinuousConnections.IsEnabled = false;
 
                         break;
                     case "UDP":
                         BorderTextStatusConnection.Visibility = Visibility.Hidden;
                         ButtonConnectConnection.Visibility = Visibility.Hidden;
                         ButtonSendDataToSocket.IsEnabled = true;
+                        ButtonLoopContinuousConnections.IsEnabled = true;
 
                         break;
                     default:
@@ -460,7 +491,7 @@ namespace CommunicationProtocol
             
             if (ListComboProtocols.SelectedItem.ToString() == "UDP")
             {
-                udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text);
+                udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text, this);
             }
         }
 
@@ -569,10 +600,13 @@ namespace CommunicationProtocol
                 NewSessionName = ListBoxSessions.SelectedItem.ToString();
             }
 
-            if (ListSessions.Sessions.Any(x => x.NameSession == NewSessionName))
+            if (ListSessions.Sessions != null)
             {
-                UpdateSessionSave(NewSessionName);
-                return;
+                if (ListSessions.Sessions.Any(x => x.NameSession == NewSessionName))
+                {
+                    UpdateSessionSave(NewSessionName);
+                    return;
+                }
             }
 
             string Encoding = String.Empty;
@@ -611,6 +645,11 @@ namespace CommunicationProtocol
             if (ListSessions == null)
             {
                 ListSessions = new RootSessions();
+            }
+
+            if (ListSessions.Sessions == null)
+            {
+                ListSessions.Sessions = new List<Session>();
             }
 
             ListSessions.Sessions.Add(Session);
@@ -837,7 +876,7 @@ namespace CommunicationProtocol
                     if (ListComboProtocols.SelectedItem.ToString() == "UDP")
                     {
                         ListComboProtocols.IsEnabled = true;
-                        ListComboEncodings.IsEnabled = true;
+                        //ListComboEncodings.IsEnabled = true;
                         InputIPConnection.IsEnabled = true;
                         InputPORTConnection.IsEnabled = true;
                         InputIPConnection.IsEnabled = true;
@@ -846,18 +885,25 @@ namespace CommunicationProtocol
 
                     TextBoxContentCommands.IsEnabled = true;
                     ButtonSendDataToSocket.IsEnabled = true;
+                    TextBoxContinuous.IsEnabled = true;
+                    ButtonUpNumberContinuous.IsEnabled = true;
+                    ButtonDownNumberContinuous.IsEnabled = true;
+
                 } else
                 {
                     if (ListComboProtocols.SelectedItem.ToString() == "UDP")
                     {
                         ListComboProtocols.IsEnabled = false;
-                        ListComboEncodings.IsEnabled = false;
+                        //ListComboEncodings.IsEnabled = false;
                         InputIPConnection.IsEnabled = false;
                         InputPORTConnection.IsEnabled = false;
                     }
 
                     TextBoxContentCommands.IsEnabled = false;
                     ButtonSendDataToSocket.IsEnabled = false;
+                    TextBoxContinuous.IsEnabled = false;
+                    ButtonUpNumberContinuous.IsEnabled = false;
+                    ButtonDownNumberContinuous.IsEnabled = false;
 
                     LoopConnections = new Thread(() => LoopConnectionsThread());
                     LoopConnections.Start();
@@ -885,9 +931,23 @@ namespace CommunicationProtocol
                         TextBoxContentCommands.Dispatcher.Invoke(() => ContentCommands = TextBoxContentCommands.Text);
 
                         tcpServer.SendMessage(ContentCommands);
+                    } else
+                    {
+
+                        string ContentCommands = String.Empty;
+                        TextBoxContentCommands.Dispatcher.Invoke(() => ContentCommands = TextBoxContentCommands.Text);
+
+                        string _InputIPConnection = String.Empty;
+                        string _InputPORTConnection = String.Empty;
+                        InputIPConnection.Dispatcher.Invoke(() => _InputIPConnection = this.InputIPConnection.Text);
+                        InputPORTConnection.Dispatcher.Invoke(() => _InputPORTConnection = this.InputPORTConnection.Text);
+
+                        udpClient.SendMessage(_InputIPConnection, Int32.Parse(_InputPORTConnection), GetActualEncoding(), ContentCommands, this);
                     }
 
-                    Thread.Sleep(1000);
+                    int TimeSleep = 1;
+                    TextBoxContinuous.Dispatcher.Invoke(() => TimeSleep = Int32.Parse(TextBoxContinuous.Text));
+                    Thread.Sleep(TimeSleep * 1000);
                 }
 
             }

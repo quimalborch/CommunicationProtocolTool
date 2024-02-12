@@ -19,6 +19,7 @@ namespace CommunicationProtocol
         private NetworkStream stream;
         private Encoding encoding;
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+        private MainWindow mainWindow;
 
         public class MessageReceivedEventArgs : EventArgs
         {
@@ -30,13 +31,15 @@ namespace CommunicationProtocol
             }
         }
         
-        public bool Start(string ip, int port, Encoding encoding)
+        public bool Start(string ip, int port, Encoding encoding, MainWindow _mainWindow)
         {
             try
             {
                 this.client = new TcpClient(ip, port);
                 this.stream = client.GetStream();
                 this.encoding = encoding;
+
+                mainWindow = _mainWindow;
 
                 void StartListenerTPCClient()
                 {
@@ -72,7 +75,7 @@ namespace CommunicationProtocol
                     return;
                 }
 
-                string message = encoding.GetString(buffer, 0, bytesRead);
+                string message = mainWindow.GetActualEncoding().GetString(buffer, 0, bytesRead);
 
                 // Invocar el evento con el mensaje recibido
                 MessageReceived?.Invoke(this, new MessageReceivedEventArgs(message));
@@ -87,7 +90,7 @@ namespace CommunicationProtocol
         {
             try
             {
-                byte[] data = encoding.GetBytes(message);
+                byte[] data = mainWindow.GetActualEncoding().GetBytes(message);
                 stream.Write(data, 0, data.Length);
             }
             catch (Exception ex)

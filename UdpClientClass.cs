@@ -14,10 +14,12 @@ namespace CommunicationProtocol
     {
         UdpClient udpClient;
         Thread thread;
-        public void SendMessage(string IP, int Port, Encoding encoding, string TextMessage)
+        MainWindow mainWindow;
+        public void SendMessage(string IP, int Port, Encoding encoding, string TextMessage, MainWindow _mainWindow)
         {
 			try
 			{
+                mainWindow = _mainWindow;
                 lock (this) // Use a lock for thread-safe access to udpClient
                 {
                     if (udpClient != null)
@@ -69,11 +71,15 @@ namespace CommunicationProtocol
                 string returnData = encoding.GetString(receiveBytes);
 
                 // Uses the IPEndPoint object to determine which of these two hosts responded.
-                MessageBox.Show("This is the message you received " + returnData.ToString());
-                MessageBox.Show("This message was sent from " + RemoteIpEndPoint.Address.ToString() + " on their port number " + RemoteIpEndPoint.Port.ToString());
+                //MessageBox.Show("This is the message you received " + returnData.ToString());
+                //MessageBox.Show("This message was sent from " + RemoteIpEndPoint.Address.ToString() + " on their port number " + RemoteIpEndPoint.Port.ToString());
+
+                //invoke to change text TextBoxRecivedInformation
+                mainWindow.Dispatcher.Invoke(() => mainWindow.TextBoxRecivedInformation.Text = mainWindow.TextBoxRecivedInformation.Text + "[" + RemoteIpEndPoint.Address.ToString() + ":" + RemoteIpEndPoint.Port.ToString() + "]: " + returnData.ToString() + "\n");
+
                 udpClient.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
