@@ -364,7 +364,7 @@
         </ListView>
         <TextBox x:Name="TextBoxContentCommands" Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="264,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" Height="116" AcceptsReturn="True"/>
         <Button x:Name="ButtonSendDataToSocket" Style="{DynamicResource ButtonPlayPause}" Content="Send 📩" HorizontalAlignment="Left" Margin="626,226,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonSendDataToSocket_Click" IsEnabled="False"/>
-        <Button x:Name="ButtonConnectConnection_Copy1" Style="{DynamicResource ButtonPlayPause}" Content="Continuous" HorizontalAlignment="Left" Margin="626,200,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="21" Background="#FF0A003E" Foreground="White" FontSize="9"/>
+        <Button x:Name="ButtonLoopContinuousConnections" Style="{DynamicResource ButtonPlayPause}" Content="Continuous" HorizontalAlignment="Left" Margin="626,200,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="21" Background="#FF0A003E" Foreground="White" FontSize="9" Click="ButtonLoopContinuousConnections_Click" IsEnabled="False"/>
         <Label x:Name="LabelVersionCommunicationProtocol" Content="Version: 0.0.0" HorizontalAlignment="Right" Margin="0,478,10,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FF909090"/>
         <Label Content="Quim Alborch. MIT License" HorizontalAlignment="Right" Margin="0,478,601,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FF909090" Width="189"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="26,274,281,0" CornerRadius="8,8,8,8" Height="199" VerticalAlignment="Top">
@@ -393,12 +393,12 @@
         <ListBox x:Name="ListBoxSessions" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="545,374,116,58"/>
         <Image HorizontalAlignment="Left" Height="30" Margin="763,-35,0,0" VerticalAlignment="Top" Width="31" Source="/x-svg.png"/>
         <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="ButtonCloseApplication" Content="" HorizontalAlignment="Left" Margin="756,-35,0,520" Width="44" BorderBrush="#00FF0606" Click="ButtonCloseApplication_Click" Background="{x:Null}"/>
-        <TextBox Style="{DynamicResource TextBoxSecondsLoopStyle}" HorizontalAlignment="Right" Margin="0,169,126,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="48" Height="26" TextAlignment="Center" FontSize="18"/>
+        <TextBox x:Name="TextBoxContinuous" Style="{DynamicResource TextBoxSecondsLoopStyle}" HorizontalAlignment="Right" Margin="0,169,126,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="48" Height="26" TextAlignment="Center" FontSize="18"/>
         <Border BorderBrush="#FF0A003E" BorderThickness="1" Margin="674,169,106,320" Background="#FF0A003E" CornerRadius="0,5,5,0"/>
         <Image HorizontalAlignment="Left" Height="5" Margin="680,173,0,0" VerticalAlignment="Top" Width="8" Source="/ArrowUp.png"/>
-        <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonUpNumberContinuous" Content="" HorizontalAlignment="Left" Margin="674,169,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" Click="Button_Click" BorderBrush="{x:Null}" Background="Transparent" Foreground="White"/>
+        <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonUpNumberContinuous" Content="" HorizontalAlignment="Left" Margin="674,169,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="Transparent" Foreground="White" Click="ButtonUpNumberContinuous_Click"/>
         <Image HorizontalAlignment="Left" Height="5" Margin="680,186,0,0" VerticalAlignment="Top" Width="8" Source="/ArrowDown.png"/>
-        <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonDownNumberContinuous" Content="" HorizontalAlignment="Left" Margin="674,182,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" Click="Button_Click" BorderBrush="{x:Null}" Background="Transparent" Foreground="White"/>
+        <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonDownNumberContinuous" Content="" HorizontalAlignment="Left" Margin="674,182,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="Transparent" Foreground="White" Click="ButtonDownNumberContinuous_Click"/>
         <Label Content="secs." HorizontalAlignment="Left" Margin="696,180,0,0" VerticalAlignment="Top" Width="54" Height="22" FontSize="9"/>
 
 

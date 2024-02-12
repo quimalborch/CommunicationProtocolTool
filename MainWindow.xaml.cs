@@ -36,6 +36,7 @@ namespace CommunicationProtocol
         public RootSessions ListSessions;
         UdpClientClass udpClient = new UdpClientClass();
         Thread ThreadConnectionClientTCP;
+        Thread LoopConnections;
 
         #region Class Session
         public class Answer
@@ -154,6 +155,7 @@ namespace CommunicationProtocol
 
                     ListComboProtocols.IsEnabled = true;
                     ButtonSendDataToSocket.IsEnabled = false;
+                    ButtonLoopContinuousConnections.IsEnabled = false;
 
                     InputIPConnection.IsEnabled = true;
                     InputPORTConnection.IsEnabled = true;
@@ -196,6 +198,7 @@ namespace CommunicationProtocol
                     ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = false);
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
                     ButtonSendDataToSocket.Dispatcher.Invoke(() => ButtonSendDataToSocket.IsEnabled = true);
+                    ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.IsEnabled = true);
 
                     //rgba 230, 255, 0, 30%
                     BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(50, 230, 250, 0)));
@@ -766,9 +769,128 @@ namespace CommunicationProtocol
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private int IndexTextBoxContinuous;
+        private void ButtonUpNumberContinuous_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (Int32.TryParse(TextBoxContinuous.Text, out int Continuous))
+                {
+                    Continuous++;
+                    IndexTextBoxContinuous = Continuous;
+                    TextBoxContinuous.Text = Continuous.ToString();
+                } else
+                {
+                    IndexTextBoxContinuous = IndexTextBoxContinuous + 1;
+                    TextBoxContinuous.Text = IndexTextBoxContinuous.ToString();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
 
+        private void ButtonDownNumberContinuous_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Int32.TryParse(TextBoxContinuous.Text, out int Continuous))
+                {
+                    Continuous--;
+                    if (Continuous < 1)
+                    {
+                        Continuous = 1;
+                    }
+
+                    IndexTextBoxContinuous = Continuous;
+                    TextBoxContinuous.Text = Continuous.ToString();
+                }
+                else
+                {
+                    if (IndexTextBoxContinuous < 2)
+                    {
+                        IndexTextBoxContinuous = 2;
+                    }
+
+                    IndexTextBoxContinuous = IndexTextBoxContinuous - 1;
+                    TextBoxContinuous.Text = IndexTextBoxContinuous.ToString();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void ButtonLoopContinuousConnections_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (LoopConnections != null && LoopConnections.IsAlive)
+                {
+                    LoopConnections.Abort();
+                    ButtonLoopContinuousConnections.Content = "Continuous";
+
+                    if (ListComboProtocols.SelectedItem.ToString() == "UDP")
+                    {
+                        ListComboProtocols.IsEnabled = true;
+                        ListComboEncodings.IsEnabled = true;
+                        InputIPConnection.IsEnabled = true;
+                        InputPORTConnection.IsEnabled = true;
+                        InputIPConnection.IsEnabled = true;
+                        InputPORTConnection.IsEnabled = true;
+                    }
+
+                    TextBoxContentCommands.IsEnabled = true;
+                    ButtonSendDataToSocket.IsEnabled = true;
+                } else
+                {
+                    if (ListComboProtocols.SelectedItem.ToString() == "UDP")
+                    {
+                        ListComboProtocols.IsEnabled = false;
+                        ListComboEncodings.IsEnabled = false;
+                        InputIPConnection.IsEnabled = false;
+                        InputPORTConnection.IsEnabled = false;
+                    }
+
+                    TextBoxContentCommands.IsEnabled = false;
+                    ButtonSendDataToSocket.IsEnabled = false;
+
+                    LoopConnections = new Thread(() => LoopConnectionsThread());
+                    LoopConnections.Start();
+
+                }
+
+            }
+            catch (Exception)
+            {
+                TextBoxContentCommands.IsEnabled = true;
+            }
+        }
+
+        private void LoopConnectionsThread()
+        {
+            try
+            {
+                ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.Content = "🛑 Continuous");
+
+                while (true)
+                {
+                    if (tcpClientActive)
+                    {
+                        string ContentCommands = String.Empty;
+                        TextBoxContentCommands.Dispatcher.Invoke(() => ContentCommands = TextBoxContentCommands.Text);
+
+                        tcpServer.SendMessage(ContentCommands);
+                    }
+
+                    Thread.Sleep(1000);
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
