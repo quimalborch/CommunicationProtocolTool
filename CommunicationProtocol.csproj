@@ -156,10 +156,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="x-svg.png" />
-    <Resource Include="x-svg-red.png" />
+    <Resource Include="resources\x-svg.png" />
+    <Resource Include="resources\x-svg-red.png" />
     <Resource Include="logo.ico" />
+    <Resource Include="ArrowUp.png" />
+    <Resource Include="ArrowDown.png" />
     <Content Include="published\.gitattributes" />
-    <Content Include="x.svg" />
+    <Content Include="resources\x.svg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
