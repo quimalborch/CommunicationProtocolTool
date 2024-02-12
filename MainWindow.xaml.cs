@@ -633,12 +633,16 @@ namespace CommunicationProtocol
             try
             {
                 List<string> ListNameSessions = new List<string>();
-                for (global::System.Int32 i = 0; i < ListSessions.Sessions.Count; i++)
-                {
-                    ListNameSessions.Add(ListSessions.Sessions[i].NameSession);
-                }
 
-                ListBoxSessions.ItemsSource = ListNameSessions;
+                if (ListSessions.Sessions != null)
+                {
+                    for (global::System.Int32 i = 0; i < ListSessions.Sessions.Count; i++)
+                    {
+                        ListNameSessions.Add(ListSessions.Sessions[i].NameSession);
+                    }
+
+                    ListBoxSessions.ItemsSource = ListNameSessions;
+                }
             }
             catch (Exception)
             {
