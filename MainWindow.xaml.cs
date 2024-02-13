@@ -131,7 +131,7 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
+                
             }
         }
 
@@ -273,7 +273,6 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
             }
         }
 
@@ -339,7 +338,6 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
             }
         }
 
@@ -364,7 +362,6 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
             }
         }
         #endregion
@@ -408,10 +405,10 @@ namespace CommunicationProtocol
                 ControllerMessageValidConnections = StringMessageBox;
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ControllerMessageValidConnections = String.Empty;
+                return false;
             }
         }
         private bool IsValidPort(string portString)
@@ -564,7 +561,6 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
             }
         }
         private void UpdateSessionSave(string SessionName)
@@ -602,7 +598,6 @@ namespace CommunicationProtocol
             catch (Exception ex)
             {
 
-                throw;
             }
         }
         private void ButtonSaveSession_Click(object sender, RoutedEventArgs e)
@@ -706,7 +701,6 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
             }
         }
 
@@ -729,7 +723,7 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
+                //throw;
             }
         }
         #endregion
@@ -752,7 +746,7 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
+                //throw;
             }
         }
 
@@ -797,7 +791,7 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
-                throw;
+                //throw;
             }
         }
 
@@ -1014,7 +1008,7 @@ namespace CommunicationProtocol
             catch (Exception ex)
             {
 
-                throw;
+                //throw;
             }
 
         }
@@ -1042,7 +1036,7 @@ namespace CommunicationProtocol
             catch (Exception ex)
             {
 
-                throw;
+                //throw;
             }
         }
     }
