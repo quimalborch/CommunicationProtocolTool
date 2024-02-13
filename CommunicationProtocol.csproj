@@ -196,7 +196,6 @@
     <Resource Include="commands\Z_NICE_LABEL_LINE1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_QR1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_RECTANGLE1.xml" />
-    <Resource Include="commands\a.xml" />
     <Content Include="published\.gitattributes" />
     <Resource Include="resources\commands\x-svg-red.png" />
     <Resource Include="resources\commands\COUNTERS.xml" />
