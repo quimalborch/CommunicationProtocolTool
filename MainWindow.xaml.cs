@@ -117,16 +117,21 @@ namespace CommunicationProtocol
         {
             try
             {
-                //de la carpeta raiz del proyecto en la carpeta commands, haz una lista de los nombres de archivos.
-                string[] files = Directory.GetFiles(@"commands", "*.xml");
-
-                List<string> ListCommands = new List<string>();
-                foreach (string file in files)
+                string commandsFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "commands");
+                if (Directory.Exists(commandsFolderPath))
                 {
-                       ListCommands.Add(System.IO.Path.GetFileNameWithoutExtension(file));
-                }
+                    string[] files = Directory.GetFiles(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "commands"), "*.xml");
+                    List<string> ListCommands = new List<string>();
+                    foreach (string file in files)
+                    {
+                           ListCommands.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+                    }
 
-                ListBoxCommands.ItemsSource = ListCommands;
+                    ListBoxCommands.ItemsSource = ListCommands;
+                } else
+                {
+                    MessageBox.Show("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool");
+                }
             }
             catch (Exception)
             {
@@ -976,34 +981,42 @@ namespace CommunicationProtocol
         {
             try
             {
-                string Text = TextBoxSearchBoxListCommands.Text;
 
-                string[] files = Directory.GetFiles(@"commands", "*.xml");
-
-                List<string> ListCommands = new List<string>();
-                foreach (string file in files)
+                string commandsFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "commands");
+                if (Directory.Exists(commandsFolderPath))
                 {
-                    ListCommands.Add(System.IO.Path.GetFileNameWithoutExtension(file));
-                }
+                    string Text = TextBoxSearchBoxListCommands.Text;
+                    string[] files = Directory.GetFiles(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "commands"), "*.xml");
 
-                ListBoxCommands.ItemsSource = ListCommands;
-
-                if (Text == String.Empty)
-                {
-                    ListBoxCommands.ItemsSource = ListCommands;
-                    return;
-                }
-
-                List<string> ListCommandsFiltered = new List<string>();
-                foreach (string Command in ListCommands)
-                {
-                    if ((Command.ToUpper()).Contains(Text.ToUpper()))
+                    List<string> ListCommands = new List<string>();
+                    foreach (string file in files)
                     {
-                        ListCommandsFiltered.Add(Command);
+                        ListCommands.Add(System.IO.Path.GetFileNameWithoutExtension(file));
                     }
+
+                    ListBoxCommands.ItemsSource = ListCommands;
+
+                    if (Text == String.Empty)
+                    {
+                        ListBoxCommands.ItemsSource = ListCommands;
+                        return;
+                    }
+
+                    List<string> ListCommandsFiltered = new List<string>();
+                    foreach (string Command in ListCommands)
+                    {
+                        if ((Command.ToUpper()).Contains(Text.ToUpper()))
+                        {
+                            ListCommandsFiltered.Add(Command);
+                        }
+                    }
+
+                    ListBoxCommands.ItemsSource = ListCommandsFiltered;
+                } else
+                {
+                    MessageBox.Show("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool");
                 }
 
-                ListBoxCommands.ItemsSource = ListCommandsFiltered;
             }
             catch (Exception ex)
             {
@@ -1022,16 +1035,24 @@ namespace CommunicationProtocol
                     return;
                 }
 
-                string SelectedCommand = ListBoxCommands.SelectedItem.ToString();
-                string filePath = @"commands\" + SelectedCommand + ".xml";
-
-                if (!File.Exists(filePath))
+                string commandsFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "commands");
+                if (Directory.Exists(commandsFolderPath))
                 {
-                    return;
+                    string SelectedCommand = ListBoxCommands.SelectedItem.ToString();
+                    string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "commands").ToString() + "\\" + SelectedCommand + ".xml";
+
+                    if (!File.Exists(filePath))
+                    {
+                        return;
+                    }
+
+                    string fileText = File.ReadAllText(filePath);
+                    TextBoxContentCommands.Text = fileText;
+                } else
+                {
+                    MessageBox.Show("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool");
                 }
 
-                string fileText = File.ReadAllText(filePath);
-                TextBoxContentCommands.Text = fileText;
             }
             catch (Exception ex)
             {
