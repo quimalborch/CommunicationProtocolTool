@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Job Version="2.1">
+  <JobParameters>
+    <LabelName>LineSettings</LabelName>
+    <Quantity>1</Quantity>
+    <Type>Store</Type>
+    <Action/>
+  </JobParameters>
+  <Label>
+    <Configuration>
+      <Unit>dot</Unit>
+      <Name>LineSettings</Name>
+      <Size>
+        <Width>709</Width>
+        <Height>510</Height>
+      </Size>
+      <ResolutionX Value="180"/>
+      <ResolutionY Value="180"/>
+      <PrintSpeed Unit="m/min">20</PrintSpeed>
+      <PrintOffset>50</PrintOffset>
+      <PrintDirection>LeftToRight</PrintDirection>
+      <SpeedMode>FixedSpeed</SpeedMode>
+      <PhotocellMode>Photocell</PhotocellMode>
+      <UpsideDown>Yes</UpsideDown>
+    </Configuration>
+    <Layout>
+      <Text>
+        <Position>
+          <X>492</X>
+          <Y>294</Y>
+        </Position>
+        <Size>
+          <Width>136</Width>
+          <Height>84</Height>
+        </Size>
+        <Rotation>180</Rotation>
+        <Font>
+          <Name>Tahoma</Name>
+          <FontSize>84</FontSize>
+          <Descent>14</Descent>
+          <IntLeading>14</IntLeading>
+        </Font>
+        <Content>
+          <Fixed>Text</Fixed>
+        </Content>
+      </Text>
+    </Layout>
+  </Label>
+</Job>

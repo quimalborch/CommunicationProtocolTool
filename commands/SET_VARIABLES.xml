@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PROTOCOL>
+    <SET_VARIABLES Format="Default.ubf">
+        <VARIABLE Name="Var0" Value="Value var 0"/>
+        <VARIABLE Name="Var1" Value="Value var 1"/>
+        <VARIABLE Name="Var2" Value="Value var 2"/>
+    </SET_VARIABLES>
+</PROTOCOL>

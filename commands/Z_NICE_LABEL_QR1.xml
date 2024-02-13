@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Job Version="2.1">
+  <JobParameters>
+    <LabelName>Qr</LabelName>
+    <Quantity>1</Quantity>
+    <Type>Store</Type>
+    <Action/>
+  </JobParameters>
+  <Label>
+    <Configuration>
+      <Unit>dot</Unit>
+      <Name>Qr</Name>
+      <Size>
+        <Width>709</Width>
+        <Height>510</Height>
+      </Size>
+      <ResolutionX Value="180"/>
+      <ResolutionY Value="180"/>
+      <PrintSpeed Unit="m/min">20</PrintSpeed>
+      <PrintOffset>0</PrintOffset>
+      <PrintDirection>LeftToRight</PrintDirection>
+      <SpeedMode>FixedSpeed</SpeedMode>
+      <PhotocellMode>Photocell</PhotocellMode>
+      <UpsideDown>No</UpsideDown>
+    </Configuration>
+    <Layout>
+      <Barcode2D>
+        <Position>
+          <X>59</X>
+          <Y>31</Y>
+        </Position>
+        <Size>
+          <Width>350</Width>
+          <Height>350</Height>
+        </Size>
+        <Rotation>0</Rotation>
+        <Type>QR</Type>
+        <Expansion>14</Expansion>
+        <ErrorCorrection>Low</ErrorCorrection>
+        <SymbolVersion>Automatic</SymbolVersion>
+        <Content>
+          <Fixed>https://www.ubscode.es</Fixed>
+        </Content>
+      </Barcode2D>
+    </Layout>
+  </Label>
+</Job>

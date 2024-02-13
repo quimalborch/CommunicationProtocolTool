@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PROTOCOL>
+    <IMPR Format="Default.ubf" Quantity="2">
+        <VARIABLE Name="Var0" Value="A" />
+        <VARIABLE Name="Var1" Value="B" />
+        <VARIABLE Name="Var2" Value="C" />
+    </IMPR>
+</PROTOCOL>

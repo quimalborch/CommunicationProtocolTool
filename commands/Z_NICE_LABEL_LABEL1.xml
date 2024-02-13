@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Job Version="2.1">
+  <JobParameters>
+    <LabelName>Label</LabelName>
+    <Quantity>1</Quantity>
+    <Type>Print</Type>
+    <Action/>
+  </JobParameters>
+  <Label>
+    <Configuration>
+      <Unit>dot</Unit>
+      <Name>Label</Name>
+      <Size>
+        <Width>709</Width>
+        <Height>510</Height>
+      </Size>
+      <ResolutionX Value="180"/>
+      <ResolutionY Value="180"/>
+      <PrintSpeed Unit="m/min">20</PrintSpeed>
+      <PrintOffset>0</PrintOffset>
+      <SpeedMode>FixedSpeed</SpeedMode>
+      <PhotocellMode>Photocell</PhotocellMode>
+      <UpsideDown>No</UpsideDown>
+    </Configuration>
+    <Layout>
+      <Text>
+        <Position>
+          <X>89</X>
+          <Y>49</Y>
+        </Position>
+        <Size>
+          <Width>544</Width>
+          <Height>431</Height>
+        </Size>
+        <Rotation>0</Rotation>
+        <Font>
+          <Name>Batang</Name>
+          <FontSize>431</FontSize>
+          <Descent>61</Descent>
+          <IntLeading>0</IntLeading>
+        </Font>
+        <Content>
+          <Fixed>Text</Fixed>
+        </Content>
+      </Text>
+    </Layout>
+  </Label>
+</Job>
+
