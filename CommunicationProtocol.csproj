@@ -162,8 +162,45 @@
     <Resource Include="ArrowUp.png" />
     <Resource Include="ArrowDown.png" />
     <Resource Include="help.png" />
+    <Resource Include="commands\COUNTERS.xml" />
+    <Resource Include="commands\DELETE_FORMAT.xml" />
+    <Resource Include="commands\DOWNLOAD_IMAGE.xml" />
+    <Resource Include="commands\ERROR_LIST.xml" />
+    <Resource Include="commands\FORMAT.xml" />
+    <Resource Include="commands\FORMAT_LIST.xml" />
+    <Resource Include="commands\GET_ENCODING.xml" />
+    <Resource Include="commands\GET_FORMAT.xml" />
+    <Resource Include="commands\GET_PRINT_CONFIG.xml" />
+    <Resource Include="commands\GET_STATUS.xml" />
+    <Resource Include="commands\IMPR.xml" />
+    <Resource Include="commands\PRINTING_FORMAT.xml" />
+    <Resource Include="commands\PRINT_CONFIG.xml" />
+    <Resource Include="commands\PRINT_STATUS.xml" />
+    <Resource Include="commands\QUEUE_CLEAR.xml" />
+    <Resource Include="commands\QUEUE_DISABLE.xml" />
+    <Resource Include="commands\QUEUE_ENABLE.xml" />
+    <Resource Include="commands\QUEUE_STATUS.xml" />
+    <Resource Include="commands\SET_ENCODING.xml" />
+    <Resource Include="commands\SET_VARIABLES.xml" />
+    <Resource Include="commands\VARIABLE_BACTH.xml" />
+    <Resource Include="commands\VARIABLE_BATCH_CLEAR.xml" />
+    <Resource Include="commands\VARIABLE_BATCH_COUNT.xml" />
+    <Resource Include="commands\VARIABLE_LIST.xml" />
+    <Resource Include="commands\VERSION.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_CODIGOFORMULA1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_CODIGOS1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_CONCATENAR1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_FORMULAS1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_IMAGE1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_LABEL1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_LINE1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_QR1.xml" />
+    <Resource Include="commands\Z_NICE_LABEL_RECTANGLE1.xml" />
     <Content Include="published\.gitattributes" />
     <Content Include="resources\x.svg" />
+    <Content Include="commands\**\*">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PROTOCOL>
+    <DOWNLOAD_IMAGE Name="Image_Name">
+        <![CDATA[ BASE64_IMAGE_DATA ]]>
+    </DOWNLOAD_IMAGE>
+</PROTOCOL>

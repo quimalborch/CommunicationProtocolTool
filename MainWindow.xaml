@@ -355,13 +355,6 @@
                 <Label Content="Commands" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="34,167,548,0" Height="86" VerticalAlignment="Top">
-            <ListView.View>
-                <GridView AllowsColumnReorder="False" ColumnHeaderStringFormat="">
-                    <GridViewColumn HeaderStringFormat=""/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <TextBox x:Name="TextBoxContentCommands" Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="264,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" Height="116" AcceptsReturn="True"/>
         <Button x:Name="ButtonSendDataToSocket" Style="{DynamicResource ButtonPlayPause}" Content="Send 📩" HorizontalAlignment="Left" Margin="626,226,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonSendDataToSocket_Click" IsEnabled="False"/>
         <Button x:Name="ButtonLoopContinuousConnections" Style="{DynamicResource ButtonPlayPause}" Content="Continuous" HorizontalAlignment="Left" Margin="626,200,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="21" Background="#FF0A003E" Foreground="White" FontSize="9" Click="ButtonLoopContinuousConnections_Click" IsEnabled="False"/>
@@ -402,6 +395,8 @@
         <Label Content="secs." HorizontalAlignment="Left" Margin="696,180,0,0" VerticalAlignment="Top" Width="54" Height="22" FontSize="9"/>
         <Image HorizontalAlignment="Left" Height="25" Margin="720,-33,0,0" VerticalAlignment="Top" Width="26" Source="/help.png"/>
         <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="ButtonCloseApplication_Copy" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Click="ButtonCloseApplication_Click" Background="{x:Null}" RenderTransformOrigin="0.503,0.708"/>
+        <TextBox x:Name="TextBoxSearchBoxListCommands" HorizontalAlignment="Left" Margin="31,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="20" TextChanged="TextBoxSearchBoxListCommands_TextChanged"/>
+        <ListBox x:Name="ListBoxCommands" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,188,549,262" SelectionChanged="ListBoxCommands_SelectionChanged"/>
 
 
     </Grid>

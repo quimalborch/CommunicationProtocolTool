@@ -108,11 +108,32 @@ namespace CommunicationProtocol
             StartAllTypeProtocol();
             StartAllComponent();
             StartLocalSessions();
+            LoadListCommandsXML();
 
             LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
+        private void LoadListCommandsXML()
+        {
+            try
+            {
+                //de la carpeta raiz del proyecto en la carpeta commands, haz una lista de los nombres de archivos.
+                string[] files = Directory.GetFiles(@"commands", "*.xml");
 
+                List<string> ListCommands = new List<string>();
+                foreach (string file in files)
+                {
+                       ListCommands.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+                }
+
+                ListBoxCommands.ItemsSource = ListCommands;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -954,6 +975,74 @@ namespace CommunicationProtocol
             catch (Exception)
             {
 
+            }
+        }
+
+        private void TextBoxSearchBoxListCommands_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string Text = TextBoxSearchBoxListCommands.Text;
+
+                string[] files = Directory.GetFiles(@"commands", "*.xml");
+
+                List<string> ListCommands = new List<string>();
+                foreach (string file in files)
+                {
+                    ListCommands.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+                }
+
+                ListBoxCommands.ItemsSource = ListCommands;
+
+                if (Text == String.Empty)
+                {
+                    ListBoxCommands.ItemsSource = ListCommands;
+                    return;
+                }
+
+                List<string> ListCommandsFiltered = new List<string>();
+                foreach (string Command in ListCommands)
+                {
+                    if ((Command.ToUpper()).Contains(Text.ToUpper()))
+                    {
+                        ListCommandsFiltered.Add(Command);
+                    }
+                }
+
+                ListBoxCommands.ItemsSource = ListCommandsFiltered;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        private void ListBoxCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (ListBoxCommands.SelectedItem == null)
+                {
+                    return;
+                }
+
+                string SelectedCommand = ListBoxCommands.SelectedItem.ToString();
+                string filePath = @"commands\" + SelectedCommand + ".xml";
+
+                if (!File.Exists(filePath))
+                {
+                    return;
+                }
+
+                string fileText = File.ReadAllText(filePath);
+                TextBoxContentCommands.Text = fileText;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }
