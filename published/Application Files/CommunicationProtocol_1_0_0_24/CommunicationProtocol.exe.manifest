@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="CommunicationProtocol.exe" version="1.0.0.24" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="CommunicationProtocol" version="1.0.2.8" language="neutral" processorArchitecture="msil" />
+    <commandLine file="CommunicationProtocol.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CommunicationProtocol.exe" size="737792">
+      <assemblyIdentity name="CommunicationProtocol" version="1.0.2.8" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>2phlND0bSU+HPZ77Yy0wGi0w+oI3KhIr8XM9skAbQjo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="711952">
+      <assemblyIdentity name="Newtonsoft.Json" version="13.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4eJ697B+7t9c5xqSVfBCKBam/FhJpIPGcU4bRyBE+p0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="commands\COUNTERS.xml" size="97" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>eXnUHreORxu4f8D6xCNEukdEIDcAXiSSmon1U7R+IFw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\DELETE_FORMAT.xml" size="121" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3/lzEiDjeNyaL/janb3W2XwCAklpEIU0LerhKkK38CY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\DOWNLOAD_IMAGE.xml" size="183" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>eZaDZ4XTR8FK7c5Esx4RyOr9yHktzNT5zOwrwwFQ4ms=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\ERROR_LIST.xml" size="99" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zqlcbDMY6BPJ7DAPQ9dsjJTASEwjJp+DncfR0Vavm8c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\FORMAT.xml" size="177" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>iy7xb69QbZAxRMGKb+wfnMThrdr2EvYZcjg1WK/QHnM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\FORMAT_LIST.xml" size="100" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>sYx9mJqrsET51z1MTkNdHIgma5waXT5x9xcNNc6YOXQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\GET_ENCODING.xml" size="101" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mslFASRodkbTOe1aMpe5tabOwFLnL7l/QNBIXjWEezk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\GET_FORMAT.xml" size="118" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>UtBvvwSrua/lU9CV76XVm/Nw2ngXuR5KqPGFz9+Tlqg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\GET_PRINT_CONFIG.xml" size="105" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>xa1PZYkvxeIxNu7UvJSvHYQRaR4/k4UfPB68/xuc7a4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\GET_STATUS.xml" size="99" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3Pj/D3XFJptXXyYlnyFgsTZMaEzDYWGR89pj9AM2Cug=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\IMPR.xml" size="270" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>flah7cRe9s3/DtUxu7tuSt+04FEsJr56Ag7vkDh3n4U=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\PRINT_CONFIG.xml" size="326" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>cBXtSYMfoSEZ4B2Lpn33GsPfThnGMpzaXRMVSJo/Yps=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\PRINT_STATUS.xml" size="101" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pDo/pIeUkARkYlUH12puXrqvCxs4GN29eKAIjFssIBc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\PRINTING_FORMAT.xml" size="104" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>gU7j9sMvtwqR083GB3nXjbwLBmQDYuXy6ox1MrBGjZg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\QUEUE_CLEAR.xml" size="112" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>AfWEAYqpzmkrhRuyZnN/S7848TBFR6IkSSYR2EFGqQ4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\QUEUE_DISABLE.xml" size="114" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>nUXOjc2TvFsw/oxj0Bw+uzqHALgESIZ6mMmsEvUeaLw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\QUEUE_ENABLE.xml" size="113" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>B+eL2/LpVlOF5uL6dRRvSsySP3CiSQ+4dNlaGIn+vnI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\QUEUE_STATUS.xml" size="113" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>TtEMhzKwLoCxxN/JUx7NdOvagMKOC7ocjs1Ipdo6tpg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\SET_ENCODING.xml" size="120" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>VSrUSOzh6pSBzZTI8UKlJvnx+S79kHVJzquqxaXWOLs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\SET_VARIABLES.xml" size="302" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>hIYPIbYMr9OD2wqTShQmTU/2cpHH2t4Sw0tHHXt10NQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\VARIABLE_BACTH.xml" size="221" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>21jiKAMbkTq2SnKtXVhGXVU2GEvLTTzZGrtrBm+Mekk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\VARIABLE_BATCH_CLEAR.xml" size="126" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>iePlV+G5iWmhtbu4AQUWHWs8zCvpaxJdwJzB6rB5eeI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\VARIABLE_BATCH_COUNT.xml" size="126" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>cTWmw7Q480tDlfp9ofHfVRLROdSIUU8Nitai3dWhiEs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\VARIABLE_LIST.xml" size="123" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>msr0ZcNrcU/nJRgGX+vxACO0EnW4NX6EsYJe7VmddFU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\VERSION.xml" size="96" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>K39PLpKHplO1sQnpETJ2EIXmvY67WrHUJN4XIP0VFO4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_CODIGOFORMULA1.xml" size="1273" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>hx97PaW+DjjbuMpK/Q1j0dDe8hzCjZUJUzBlyxZQI2g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_CODIGOS1.xml" size="190207" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uW7rm5l6A3DX7iaDo1ribufNcbwe8sj3wWpL8OP8v98=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_CONCATENAR1.xml" size="3223" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>gd+ak9Ob0rnOofFzfx5VABXlCNjKTa32tUXKcXkgjqo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_FORMULAS1.xml" size="7139" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>y9+x3vcF0jEOTes/7i0NAiEqNBjgrBpTHV0YOaPow90=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_IMAGE1.xml" size="60397" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>k7GltBelpWGemQfoveA+yrjkPb3kHz2S5ksA83ahnBs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_LABEL1.xml" size="1204" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>K2ZcblPaxxXvDS5wDnub4LMo7jgWI35xg8LYSMmOuaI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_LINE1.xml" size="1204" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>/2JFx3+UPGMweBWyGJcZyGshciXs7SIjSV8hrYtcwME=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_QR1.xml" size="1263" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mhQ6JPR+zvt/JCMbiwdWZVYhnqrJEWWFxH/T3U5XLNE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="commands\Z_NICE_LABEL_RECTANGLE1.xml" size="1904" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>TCwZjJ43zlBFGGQRdFoqrS1iLMhGXAsdkFnLHpbqk6g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="CommunicationProtocol.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="logo.ico" size="190925">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>MrFdGC6knvYqMCn/DHAOpfxOoPBigHWEik7JA4x2X54=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="published\.gitattributes" size="66">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>P5RU7xh1YaVuVNzYL4qOc6AievlG1yiv3yTF6cwcpo0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\x.svg" size="333">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>repqt++9yJvSrgvrNKyersUyx7G7Jn0Tn7qTzP6ao7s=</dsig:DigestValue>
+    </hash>
+  </file>
+</asmv1:assembly>

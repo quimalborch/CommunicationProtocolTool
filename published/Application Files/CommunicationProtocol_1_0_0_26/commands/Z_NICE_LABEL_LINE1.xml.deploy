@@ -1,0 +1,50 @@
+<Job Version="2.1">
+  <JobParameters>
+    <LabelName>lineas</LabelName>
+    <Quantity>1</Quantity>
+    <Type>Print</Type>
+    <Action/>
+  </JobParameters>
+  <Label>
+    <Configuration>
+      <Unit>dot</Unit>
+      <Name>lineas</Name>
+      <Size>
+        <Width>709</Width>
+        <Height>508</Height>
+      </Size>
+      <ResolutionX Value="180"/>
+      <ResolutionY Value="180"/>
+      <PrintSpeed Unit="m/min">20</PrintSpeed>
+      <PrintOffset>0</PrintOffset>
+      <PrintDirection>LeftToRight</PrintDirection>
+      <SpeedMode>FixedSpeed</SpeedMode>
+      <PhotocellMode>Photocell</PhotocellMode>
+      <UpsideDown>No</UpsideDown>
+    </Configuration>
+    <Layout>
+      <Line>
+        <Position>
+          <X>227</X>
+          <Y>18</Y>
+        </Position>
+        <LineSize>21</LineSize>
+        <EndPosition>
+          <X>227</X>
+          <Y>485</Y>
+        </EndPosition>
+      </Line>
+      <Line>
+        <Position>
+          <X>354</X>
+          <Y>18</Y>
+        </Position>
+        <LineSize>7</LineSize>
+        <EndPosition>
+          <X>354</X>
+          <Y>485</Y>
+        </EndPosition>
+      </Line>
+    </Layout>
+  </Label>
+</Job>
