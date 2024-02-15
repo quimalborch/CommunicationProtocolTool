@@ -1097,7 +1097,7 @@ namespace CommunicationProtocol
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowNotification("Calvo");
+            ShowNotification("Info button comming soon...");
         }
     }
 }
