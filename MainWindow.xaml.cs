@@ -214,7 +214,7 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool", true);
+                ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool - Button Connect", true);
             }
 
         }
@@ -237,7 +237,7 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool", true);
+                //ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool - TCP Animation", true);
             }
         }
 
@@ -301,7 +301,7 @@ namespace CommunicationProtocol
             }
             catch (Exception)
             {
-                ShowNotification("Connection failed", "Communication Protocol Tool", true);
+                ShowNotification("Connection failed", "Communication Protocol Tool - Client Thread", true);
             }
         }
 
