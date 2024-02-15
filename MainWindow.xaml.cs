@@ -113,6 +113,12 @@ namespace CommunicationProtocol
             LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
+        public void ShowNotification(string Message, string Tittle = "", bool Error = false)
+        {
+            NotifyWindow notificationWindow = new NotifyWindow(this, Message, Tittle, Error);
+            notificationWindow.ShowDialog();
+        }
+
         private void LoadListCommandsXML()
         {
             try
@@ -130,7 +136,7 @@ namespace CommunicationProtocol
                     ListBoxCommands.ItemsSource = ListCommands;
                 } else
                 {
-                    MessageBox.Show("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool");
+                    ShowNotification("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool", true);
                 }
             }
             catch (Exception)
@@ -171,7 +177,7 @@ namespace CommunicationProtocol
                     }
                     else
                     {
-                        MessageBox.Show(ControllerMessageValidConnections, "Communication Protocol Tool");
+                        ShowNotification(ControllerMessageValidConnections, "Communication Protocol Tool", true);
                     }
                 }
                 else
@@ -196,24 +202,30 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Connection failed: " + ex.Message);
+                ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool", true);
             }
 
         }
 
         private void AttemptToConnectTCPAnimation()
         {
-            //make a loop for 1 second
-            while (true)
+            try
             {
-                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting.");
-                Thread.Sleep(250);
-                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting..");
-                Thread.Sleep(250);
-                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting...");
-                Thread.Sleep(250);
-                TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting....");
-                Thread.Sleep(250);
+                while (true)
+                {
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting.");
+                    Thread.Sleep(250);
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting..");
+                    Thread.Sleep(250);
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting...");
+                    Thread.Sleep(250);
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting....");
+                    Thread.Sleep(250);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -277,7 +289,7 @@ namespace CommunicationProtocol
             }
             catch (Exception)
             {
-
+                ShowNotification("Connection failed", "Communication Protocol Tool", true);
             }
         }
 
@@ -290,7 +302,7 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                // Handle the exception appropriately
+                ShowNotification("Error receiving message: " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -400,7 +412,7 @@ namespace CommunicationProtocol
                     }
                 }
 
-                string StringMessageBox = "No se ha podido iniciar la conexión devido a los siguientes motivos: \n\n";
+                string StringMessageBox = "No se ha podido iniciar la conexión devido a los siguientes motivos: \n";
 
                 for (Int32 i = 0; i < MessageErrors.Count; i++)
                 {
@@ -418,12 +430,20 @@ namespace CommunicationProtocol
         }
         private bool IsValidPort(string portString)
         {
-            if (!int.TryParse(portString, out int port))
+            try
             {
+                if (!int.TryParse(portString, out int port))
+                {
+                    return false;
+                }
+
+                return port >= 10 && port <= 99999;
+            }
+            catch (Exception ex)
+            {
+                ShowNotification("Error for validating Port: " + ex.Message, "Communication Protocol Tool", true);
                 return false;
             }
-
-            return port >= 10 && port <= 99999;
         }
 
         private bool IsValidIP(string ipAddress)
@@ -444,32 +464,40 @@ namespace CommunicationProtocol
 
         private void ListComboProtocolsChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox != null && comboBox.SelectedItem != null)
+            try
             {
-                switch (comboBox.SelectedItem.ToString())
+                ComboBox comboBox = sender as ComboBox;
+                if (comboBox != null && comboBox.SelectedItem != null)
                 {
-                    case "TCP":
-                        BorderTextStatusConnection.Visibility = Visibility.Visible;
-                        ButtonConnectConnection.Visibility = Visibility.Visible;
-                        ButtonSendDataToSocket.IsEnabled = false;
-                        ButtonLoopContinuousConnections.IsEnabled = false;
+                    switch (comboBox.SelectedItem.ToString())
+                    {
+                        case "TCP":
+                            BorderTextStatusConnection.Visibility = Visibility.Visible;
+                            ButtonConnectConnection.Visibility = Visibility.Visible;
+                            ButtonSendDataToSocket.IsEnabled = false;
+                            ButtonLoopContinuousConnections.IsEnabled = false;
 
-                        break;
-                    case "UDP":
-                        BorderTextStatusConnection.Visibility = Visibility.Hidden;
-                        ButtonConnectConnection.Visibility = Visibility.Hidden;
-                        ButtonSendDataToSocket.IsEnabled = true;
-                        ButtonLoopContinuousConnections.IsEnabled = true;
+                            break;
+                        case "UDP":
+                            BorderTextStatusConnection.Visibility = Visibility.Hidden;
+                            ButtonConnectConnection.Visibility = Visibility.Hidden;
+                            ButtonSendDataToSocket.IsEnabled = true;
+                            ButtonLoopContinuousConnections.IsEnabled = true;
 
-                        break;
-                    default:
-                        Console.WriteLine("Looking forward to the Weekend.");
+                            break;
+                        default:
+                            Console.WriteLine("Looking forward to the Weekend.");
 
-                        break;
+                            break;
+                    }
+
                 }
-
             }
+            catch (Exception ex)
+            {
+                ShowNotification("Error changing protocol: " + ex.Message, "Communication Protocol Tool", true);
+            }
+
         }
 
         private void ButtonCloseApplication_Click(object sender, RoutedEventArgs e)
@@ -489,8 +517,9 @@ namespace CommunicationProtocol
 
                 Application.Current.Shutdown();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ShowNotification("Error closing application: " + ex.Message, "Communication Protocol Tool", true);
                 Application.Current.Shutdown();
             }
 
@@ -498,23 +527,30 @@ namespace CommunicationProtocol
 
         private void ButtonSendDataToSocket_Click(object sender, RoutedEventArgs e)
         {
-            //check if the list of protocols is tcp or udp or empty
-            if (ListComboProtocols.SelectedItem == null)
+            try
             {
-                return;
-            }
-
-            if (ListComboProtocols.SelectedItem.ToString() == "TCP")
-            {
-                if (tcpClientActive)
+                //check if the list of protocols is tcp or udp or empty
+                if (ListComboProtocols.SelectedItem == null)
                 {
-                    tcpServer.SendMessage(TextBoxContentCommands.Text);
+                    return;
+                }
+
+                if (ListComboProtocols.SelectedItem.ToString() == "TCP")
+                {
+                    if (tcpClientActive)
+                    {
+                        tcpServer.SendMessage(TextBoxContentCommands.Text);
+                    }
+                }
+            
+                if (ListComboProtocols.SelectedItem.ToString() == "UDP")
+                {
+                    udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text, this);
                 }
             }
-            
-            if (ListComboProtocols.SelectedItem.ToString() == "UDP")
+            catch (Exception ex)
             {
-                udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text, this);
+                ShowNotification("Error sending data: " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -748,10 +784,9 @@ namespace CommunicationProtocol
                 UpdateListSessions();
                 SaveSessionsInConfFile();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                //throw;
+                ShowNotification("Error deleting session: " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -795,8 +830,7 @@ namespace CommunicationProtocol
             }
             catch (Exception)
             {
-
-                //throw;
+                ShowNotification("Error loading session", "Communication Protocol Tool", true);
             }
         }
 
@@ -879,8 +913,9 @@ namespace CommunicationProtocol
                     TextBoxContinuous.Text = IndexTextBoxContinuous.ToString();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ShowNotification("Error changing continuous number: " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -934,6 +969,7 @@ namespace CommunicationProtocol
             catch (Exception)
             {
                 TextBoxContentCommands.IsEnabled = true;
+                ShowNotification("Error starting continuous connections", "Communication Protocol Tool", true);
             }
         }
 
@@ -973,7 +1009,7 @@ namespace CommunicationProtocol
             }
             catch (Exception)
             {
-
+                ShowNotification("Error starting continuous connections", "Communication Protocol Tool", true);
             }
         }
 
@@ -1014,14 +1050,13 @@ namespace CommunicationProtocol
                     ListBoxCommands.ItemsSource = ListCommandsFiltered;
                 } else
                 {
-                    MessageBox.Show("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool");
+                    ShowNotification("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool", true);
                 }
 
             }
             catch (Exception ex)
             {
-
-                //throw;
+                ShowNotification("Error searching commands: " + ex.Message, "Communication Protocol Tool", true);
             }
 
         }
@@ -1050,15 +1085,19 @@ namespace CommunicationProtocol
                     TextBoxContentCommands.Text = fileText;
                 } else
                 {
-                    MessageBox.Show("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool");
+                    ShowNotification("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool", true);
                 }
 
             }
             catch (Exception ex)
             {
-
-                //throw;
+                ShowNotification("Error selecting command: " + ex.Message, "Communication Protocol Tool", true);
             }
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowNotification("Calvo");
         }
     }
 }

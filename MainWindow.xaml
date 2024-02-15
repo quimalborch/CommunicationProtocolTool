@@ -394,7 +394,7 @@
         <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonDownNumberContinuous" Content="" HorizontalAlignment="Left" Margin="674,182,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="Transparent" Foreground="White" Click="ButtonDownNumberContinuous_Click"/>
         <Label Content="secs." HorizontalAlignment="Left" Margin="696,180,0,0" VerticalAlignment="Top" Width="54" Height="22" FontSize="9"/>
         <Image HorizontalAlignment="Left" Height="25" Margin="720,-33,0,0" VerticalAlignment="Top" Width="26" Source="/help.png"/>
-        <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="ButtonCloseApplication_Copy" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Click="ButtonCloseApplication_Click" Background="{x:Null}" RenderTransformOrigin="0.503,0.708"/>
+        <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="HelpButton" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Background="{x:Null}" RenderTransformOrigin="0.503,0.708" Click="HelpButton_Click"/>
         <TextBox x:Name="TextBoxSearchBoxListCommands" HorizontalAlignment="Left" Margin="31,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="20" TextChanged="TextBoxSearchBoxListCommands_TextChanged"/>
         <ListBox x:Name="ListBoxCommands" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,188,549,262" SelectionChanged="ListBoxCommands_SelectionChanged"/>
 
