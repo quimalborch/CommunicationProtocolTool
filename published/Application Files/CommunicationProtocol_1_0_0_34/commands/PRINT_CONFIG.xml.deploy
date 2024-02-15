@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PROTOCOL>
+    <PRINT_CONFIG>
+        <SPEED>5</SPEED>
+        <DELAY>85</DELAY>
+        <RESOLUTION>180</RESOLUTION>
+        <ENCODER>False</ENCODER>
+        <DIRECTION>True</DIRECTION>
+        <ROTATION_180>False</ROTATION_180>
+    </PRINT_CONFIG>
+</PROTOCOL>

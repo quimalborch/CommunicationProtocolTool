@@ -21,6 +21,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Deployment.Application;
 using System.Threading;
+using System.Xml.Linq;
+using System.Data.SqlTypes;
+using System.Xml;
 
 
 namespace CommunicationProtocol
@@ -110,7 +113,16 @@ namespace CommunicationProtocol
             StartLocalSessions();
             LoadListCommandsXML();
 
-            LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            bool IsVersionPublished = TryGetEntryPointVersion(out string versionPublished);
+
+            if (IsVersionPublished)
+            {
+                LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", versionPublished);
+            } else
+            {
+                LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            }
+
         }
 
         public void ShowNotification(string Message, string Tittle = "", bool Error = false)
@@ -1011,6 +1023,51 @@ namespace CommunicationProtocol
             {
                 ShowNotification("Error starting continuous connections", "Communication Protocol Tool", true);
             }
+        }
+
+        static bool TryGetEntryPointVersion(out string version)
+        {
+            version = null;
+
+            try
+            {
+                string fileName = "CommunicationProtocol.exe.manifest";
+                string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+                if (File.Exists(filePath))
+                {
+                    string fileText = File.ReadAllText(filePath);
+
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(fileText);
+
+                    XmlNodeList assemblyIdentityNodes = xmlDoc.SelectNodes("//asmv1:assemblyIdentity", GetNamespaceManager(xmlDoc));
+
+                    if (assemblyIdentityNodes[0].Attributes["version"].Value != null)
+                    {
+                        version = assemblyIdentityNodes[0].Attributes["version"].Value;
+                    }
+
+                    return version != null;
+                }
+                else
+                {
+                    Console.WriteLine($"El archivo {fileName} no se encuentra en la carpeta raíz del programa.");
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Se produjo un error al intentar cargar el archivo.");
+                return false;
+            }
+        }
+
+        private static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDoc)
+        {
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
+            namespaceManager.AddNamespace("asmv1", "urn:schemas-microsoft-com:asm.v1");
+            return namespaceManager;
         }
 
         private void TextBoxSearchBoxListCommands_TextChanged(object sender, TextChangedEventArgs e)
