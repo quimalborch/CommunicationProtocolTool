@@ -32,7 +32,7 @@
     <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -103,7 +103,7 @@
       <DependentUpon>NotifyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TcpClientClass.cs" />
-    <Compile Include="UdpClientClass.cs" />
+    <Compile Include="UdpSocket.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

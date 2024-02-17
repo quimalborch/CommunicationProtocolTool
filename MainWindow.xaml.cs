@@ -24,6 +24,7 @@ using System.Threading;
 using System.Xml.Linq;
 using System.Data.SqlTypes;
 using System.Xml;
+using System.Runtime.Remoting.Messaging;
 
 
 namespace CommunicationProtocol
@@ -37,7 +38,7 @@ namespace CommunicationProtocol
         public bool tcpClientActive;
         public MainWindow ActualInstance;
         public RootSessions ListSessions;
-        UdpClientClass udpClient = new UdpClientClass();
+        private UdpSocket udpSocket;
         Thread ThreadConnectionClientTCP;
         Thread LoopConnections;
 
@@ -576,13 +577,44 @@ namespace CommunicationProtocol
             
                 if (ListComboProtocols.SelectedItem.ToString() == "UDP")
                 {
-                    udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text, this);
+                    //udpClient.SendMessage(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text), GetActualEncoding(), TextBoxContentCommands.Text, this);
+                    udpSocket = new UdpSocket(InputIPConnection.Text, Int32.Parse(InputPORTConnection.Text));
+                    udpSocket.MessageReceived += UdpSocket_MessageReceived;
+
+                    // Iniciar un hilo o temporizador para recibir mensajes automáticamente
+                    // Puedes ajustar esto según tus necesidades
+                    Task.Run(() => ReceiveMessagesAutomatically());
+
+                    udpSocket.SendData(TextBoxContentCommands.Text);
                 }
             }
             catch (Exception ex)
             {
                 ShowNotification("Error sending data: " + ex.Message, "Communication Protocol Tool", true);
             }
+        }
+
+        private void ReceiveMessagesAutomatically()
+        {
+            while (true)
+            {
+                // Llamar a ReceiveData para recibir mensajes automáticamente
+                string mensajeRecibido = udpSocket.ReceiveData();
+                if (mensajeRecibido != null)
+                {
+                    // Actualizar el TextBox con el mensaje recibido
+                    this.Dispatcher.Invoke(() => this.TextBoxRecivedInformation.Text = this.TextBoxRecivedInformation.Text + mensajeRecibido.ToString() + "\n");
+                }
+
+                // Agregar un retraso o manejo según tus necesidades
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void UdpSocket_MessageReceived(object sender, string message)
+        {
+            // Actualizar el TextBox con el mensaje recibido
+            this.Dispatcher.Invoke(() => this.TextBoxRecivedInformation.Text = this.TextBoxRecivedInformation.Text + message.ToString() + "\n");
         }
 
         private void TextBoxRecivedInformation_TextChanged(object sender, TextChangedEventArgs e)
@@ -1041,7 +1073,7 @@ namespace CommunicationProtocol
                         InputIPConnection.Dispatcher.Invoke(() => _InputIPConnection = this.InputIPConnection.Text);
                         InputPORTConnection.Dispatcher.Invoke(() => _InputPORTConnection = this.InputPORTConnection.Text);
 
-                        udpClient.SendMessage(_InputIPConnection, Int32.Parse(_InputPORTConnection), GetActualEncoding(), ContentCommands, this);
+                        //udpClient.SendMessage(_InputIPConnection, Int32.Parse(_InputPORTConnection), GetActualEncoding(), ContentCommands, this);
                     }
 
                     int TimeSleep = 1;
