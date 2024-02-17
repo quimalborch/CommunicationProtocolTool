@@ -1,119 +1,120 @@
+
 # Communication Protocol Tool
 
-## Herramienta para pruebas de sockets completa y versátil
+## Comprehensive and Versatile Socket Testing Tool
 
-#### **Communication Protocol Tool** es una aplicación gratuita y de código abierto desarrollada en C# que te permite realizar pruebas exhaustivas de sockets TCP y UDP. Con una interfaz intuitiva y una amplia gama de funciones, es la herramienta ideal para desarrolladores que trabajan con redes y comunicaciones.
+#### **Communication Protocol Tool** is a free and open-source application developed in C# that allows you to perform thorough tests on TCP and UDP sockets. With an intuitive interface and a wide range of features, it is the ideal tool for developers working with networks and communications.
 
 ![image](https://github.com/quimalborch/CommunicationProtocolTool/assets/68965769/b7b03c73-a444-44d0-b341-18ef14f52eef)
 
-**Características principales:**
+**Key Features:**
 
--   **Cliente TCP/UDP:**
+-   **TCP/UDP Client:**
     
-    -   Conéctate a servidores TCP y UDP de forma sencilla.
-    -   Especifica la configuración de la conexión:
+    -   Connect to TCP and UDP servers effortlessly.
+    -   Specify connection settings:
         
-        -   Dirección IP
-        -   Puerto
-        -   Protocolo
-        -   Tipo de codificación
-        
-    
--   **Comandos rápidos:**
-    
-    -   Ejecuta comandos predefinidos para:
-        
-        -   Enviar mensajes
-        -   Recibir datos
-        -   Realizar otras acciones comunes en las pruebas de sockets.
+        -   IP address
+        -   Port
+        -   Protocol
+        -   Encoding type
         
     
--   **Sesiones:**
+-   **Quick Commands:**
     
-    -   Guarda y organiza diferentes configuraciones de conexión en perfiles reutilizables.
+    -   Execute predefined commands to:
+        
+        -   Send messages
+        -   Receive data
+        -   Perform other common socket testing actions.
+        
+    
+-   **Sessions:**
+    
+    -   Save and organize different connection configurations in reusable profiles.
     
 -   **Encodings:**
     
-    -   Elige entre una variedad de codificaciones de caracteres para enviar y recibir datos:
+    -   Choose from a variety of character encodings for sending and receiving data:
         
         -   UTF-8
         -   ASCII
         -   UTF-16
-        -   Entre otras
+        -   Among others
         
     
--   **Registro de actividad:**
+-   **Activity Log:**
     
-    -   Mantén un registro completo de todas las actividades de la aplicación:
+    -   Keep a comprehensive log of all application activities:
         
-        -   Conexiones realizadas
-        -   Mensajes enviados y recibidos
-        -   Errores encontrados
-        
-    
-
-**Beneficios:**
-
--   **Facilidad de uso:**
-    
-    -   Interfaz intuitiva.
-    -   Organización clara de las funciones.
-    -   Accesible incluso para usuarios principiantes.
-    
--   **Eficiencia:**
-    
-    -   Agiliza tus pruebas de sockets con:
-        
-        -   Comandos rápidos
-        -   Sesiones preconfiguradas
-        
-    
--   **Flexibilidad:**
-    
-    -   Adapta la herramienta a tus necesidades específicas con:
-        
-        -   Diferentes protocolos
-        -   Codificaciones
-        -   Configuraciones de conexión
-        
-    
--   **Confianza:**
-    
-    -   El registro de actividad te permite:
-        
-        -   Tener un seguimiento completo de tus pruebas
-        -   Detectar errores con mayor facilidad
+        -   Connections made
+        -   Messages sent and received
+        -   Encountered errors
         
     
 
-**¿Para quién es esta herramienta?**
+**Benefits:**
 
-**Communication Protocol Tool** es ideal para:
-
--   **Desarrolladores de software:**
+-   **Ease of Use:**
     
-    -   Probar la comunicación entre diferentes aplicaciones y servidores que utilizan sockets TCP y UDP.
+    -   Intuitive interface.
+    -   Clear organization of functions.
+    -   Accessible even for beginner users.
     
--   **Ingenieros de redes:**
+-   **Efficiency:**
     
-    -   Diagnosticar problemas de conectividad y rendimiento en redes TCP/IP.
+    -   Streamline your socket testing with:
+        
+        -   Quick commands
+        -   Preconfigured sessions
+        
     
--   **Estudiantes de informática:**
+-   **Flexibility:**
     
-    -   Aprender sobre los fundamentos de las redes y la comunicación por sockets.
+    -   Tailor the tool to your specific needs with:
+        
+        -   Different protocols
+        -   Encodings
+        -   Connection settings
+        
+    
+-   **Confidence:**
+    
+    -   The activity log allows you to:
+        
+        -   Have a complete overview of your tests
+        -   Detect errors more easily
+        
     
 
-**Comenzar:**
+**Who is this tool for?**
 
--   **Descarga la última versión:** Enlace a la última versión: URL válida
--   **Consulta la documentación:** Enlace a la documentación: URL válida
--   **Únete a la comunidad:** Enlace a la comunidad: URL válida
+**Communication Protocol Tool** is ideal for:
 
-**Contribuciones:**
+-   **Software Developers:**
+    
+    -   Test communication between different applications and servers using TCP and UDP sockets.
+    
+-   **Network Engineers:**
+    
+    -   Diagnose connectivity and performance issues in TCP/IP networks.
+    
+-   **Computer Science Students:**
+    
+    -   Learn about the fundamentals of networks and socket communication.
+    
 
-**Communication Protocol Tool** es un proyecto de código abierto. Te invitamos a contribuir con tu código:
+**Getting Started:**
 
--   Reportando errores
--   Sugiriendo nuevas funciones
+-   **Download the latest version:** Link to the latest version: Valid URL
+-   **Check the documentation:** Link to the documentation: Valid URL
+-   **Join the community:** Link to the community: Valid URL
 
-**¡Empieza a utilizar Communication Protocol Tool hoy mismo y lleva tus pruebas de sockets al siguiente nivel!**
+**Contributions:**
+
+**Communication Protocol Tool** is an open-source project. We invite you to contribute with your code:
+
+-   Reporting bugs
+-   Suggesting new features
+
+**Start using Communication Protocol Tool today and take your socket testing to the next level!```
