@@ -127,8 +127,15 @@ namespace CommunicationProtocol
 
         public void ShowNotification(string Message, string Tittle = "", bool Error = false)
         {
-            NotifyWindow notificationWindow = new NotifyWindow(this, Message, Tittle, Error);
-            notificationWindow.ShowDialog();
+            try
+            {
+                NotifyWindow notificationWindow = new NotifyWindow(this, Message, Tittle, Error);
+                notificationWindow.ShowDialog();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void LoadListCommandsXML()
@@ -200,6 +207,9 @@ namespace CommunicationProtocol
                     ListComboProtocols.IsEnabled = true;
                     ButtonSendDataToSocket.IsEnabled = false;
                     ButtonLoopContinuousConnections.IsEnabled = false;
+                    ButtonUpNumberContinuous.IsEnabled = false;
+                    ButtonDownNumberContinuous.IsEnabled = false;
+                    TextBoxContinuous.IsEnabled = false;
 
                     InputIPConnection.IsEnabled = true;
                     InputPORTConnection.IsEnabled = true;
@@ -273,6 +283,9 @@ namespace CommunicationProtocol
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
                     ButtonSendDataToSocket.Dispatcher.Invoke(() => ButtonSendDataToSocket.IsEnabled = true);
                     ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.IsEnabled = true);
+                    ButtonUpNumberContinuous.Dispatcher.Invoke(() => ButtonUpNumberContinuous.IsEnabled = true);
+                    ButtonDownNumberContinuous.Dispatcher.Invoke(() => ButtonDownNumberContinuous.IsEnabled = true);
+                    TextBoxContinuous.Dispatcher.Invoke(() => TextBoxContinuous.IsEnabled = true);
 
                     //rgba 230, 255, 0, 30%
                     BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(50, 230, 250, 0)));
@@ -488,6 +501,9 @@ namespace CommunicationProtocol
                             ButtonConnectConnection.Visibility = Visibility.Visible;
                             ButtonSendDataToSocket.IsEnabled = false;
                             ButtonLoopContinuousConnections.IsEnabled = false;
+                            ButtonUpNumberContinuous.IsEnabled = false;
+                            ButtonDownNumberContinuous.IsEnabled = false;
+                            TextBoxContinuous.IsEnabled = false;
 
                             break;
                         case "UDP":
@@ -495,6 +511,9 @@ namespace CommunicationProtocol
                             ButtonConnectConnection.Visibility = Visibility.Hidden;
                             ButtonSendDataToSocket.IsEnabled = true;
                             ButtonLoopContinuousConnections.IsEnabled = true;
+                            ButtonUpNumberContinuous.IsEnabled = true;
+                            ButtonDownNumberContinuous.IsEnabled = true;
+                            TextBoxContinuous.IsEnabled = true;
 
                             break;
                         default:
@@ -1019,9 +1038,12 @@ namespace CommunicationProtocol
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ShowNotification("Error starting continuous connections", "Communication Protocol Tool", true);
+                if (ex.Message != "Thread was being aborted.")
+                {
+                    ShowNotification("Error starting continuous connections: " + ex.Message, "Communication Protocol Tool", true);
+                }
             }
         }
 
