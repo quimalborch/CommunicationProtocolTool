@@ -954,6 +954,16 @@ namespace CommunicationProtocol
         {
             try
             {
+                string inputIP = InputIPConnection.Text;
+                string inputPort = InputPORTConnection.Text;
+                string ControllerMessageValidConnections = String.Empty;
+
+                if (!IsValidConnections(inputIP, inputPort, out ControllerMessageValidConnections))
+                {
+                    ShowNotification(ControllerMessageValidConnections, "Communication Protocol Tool", true);
+                    return;
+                }
+
                 if (LoopConnections != null && LoopConnections.IsAlive)
                 {
                     LoopConnections.Abort();
@@ -967,6 +977,7 @@ namespace CommunicationProtocol
                         InputPORTConnection.IsEnabled = true;
                         InputIPConnection.IsEnabled = true;
                         InputPORTConnection.IsEnabled = true;
+                        ButtonLoadSession.IsEnabled = true;
                     }
 
                     TextBoxContentCommands.IsEnabled = true;
@@ -983,6 +994,7 @@ namespace CommunicationProtocol
                         //ListComboEncodings.IsEnabled = false;
                         InputIPConnection.IsEnabled = false;
                         InputPORTConnection.IsEnabled = false;
+                        ButtonLoadSession.IsEnabled = false;
                     }
 
                     TextBoxContentCommands.IsEnabled = false;
@@ -1042,7 +1054,7 @@ namespace CommunicationProtocol
             {
                 if (ex.Message != "Thread was being aborted.")
                 {
-                    ShowNotification("Error starting continuous connections: " + ex.Message, "Communication Protocol Tool", true);
+                    this.ShowNotification("Error starting continuous connections: " + ex.Message, "Communication Protocol Tool", true);
                 }
             }
         }
