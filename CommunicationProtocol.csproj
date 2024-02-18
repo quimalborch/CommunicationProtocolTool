@@ -32,7 +32,7 @@
     <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -103,6 +103,7 @@
       <DependentUpon>NotifyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TcpClientClass.cs" />
+    <Compile Include="Translator.cs" />
     <Compile Include="UdpSocket.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +141,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CommunicationProtocol_TemporaryKey.pfx" />
+    <None Include="languages\es-es.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -169,6 +171,7 @@
     <Resource Include="ArrowUp.png" />
     <Resource Include="ArrowDown.png" />
     <Resource Include="help.png" />
+    <Resource Include="languages\es-es.json" />
     <Resource Include="commands\COUNTERS.xml" />
     <Resource Include="commands\DELETE_FORMAT.xml" />
     <Resource Include="commands\DOWNLOAD_IMAGE.xml" />
@@ -211,6 +214,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="commands\DELETE_FORMAT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="languages\es-es.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="commands\DOWNLOAD_IMAGE.xml">

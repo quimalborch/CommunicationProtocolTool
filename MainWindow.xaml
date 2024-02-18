@@ -496,7 +496,7 @@
         <Label Content="Quim Alborch. MIT License" HorizontalAlignment="Right" Margin="0,478,601,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FF909090" Width="189"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="26,274,281,0" CornerRadius="8,8,8,8" Height="199" VerticalAlignment="Top">
             <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,0,0" CornerRadius="8,0,8,0" Background="#FF0A003E" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="221">
-                <Label Content="Answer" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
+                <Label x:Name="LabelTittleAnswer" Content="Answer" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
         <TextBox x:Name="TextBoxRecivedInformation" VerticalScrollBarVisibility="Visible"  Style="{DynamicResource TextBoxCommandsStyle}" HorizontalAlignment="Left" Margin="38,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="473" Height="152" Background="WhiteSmoke" Foreground="Black" SelectionBrush="White"/>
@@ -531,6 +531,7 @@
         <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="HelpButton" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Background="{x:Null}" RenderTransformOrigin="0.503,0.708" Click="HelpButton_Click"/>
         <TextBox Style="{DynamicResource TextBoxSearchBoxListCommandsStyle}" x:Name="TextBoxSearchBoxListCommands" HorizontalAlignment="Left" Margin="31,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="20" TextChanged="TextBoxSearchBoxListCommands_TextChanged"/>
         <ListBox Style="{DynamicResource ListBoxCommandsStyle}" x:Name="ListBoxCommands" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,188,549,262" SelectionChanged="ListBoxCommands_SelectionChanged"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="662,-35,0,0" VerticalAlignment="Top" Height="30" Width="52"/>
 
 
     </Grid>

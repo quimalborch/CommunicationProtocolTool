@@ -39,6 +39,7 @@ namespace CommunicationProtocol
         public MainWindow ActualInstance;
         public RootSessions ListSessions;
         private UdpSocket udpSocket;
+        Translator translator = new Translator();
         Thread ThreadConnectionClientTCP;
         Thread LoopConnections;
 
@@ -76,6 +77,18 @@ namespace CommunicationProtocol
         }
         #endregion
 
+        public class Languages
+        {
+            public string Language { get; set; }
+            public string Code { get; set; }
+
+            public Languages(string language, string code)
+            {
+                Language = language;
+                Code = code;
+            }
+        }
+
         public class EncodingInfo
         {
             public string Name { get; set; }
@@ -109,10 +122,12 @@ namespace CommunicationProtocol
             InitializeComponent();
 
             StartAllTypeEncodings();
+            StartAllTypeLanguages();
             StartAllTypeProtocol();
             StartAllComponent();
             StartLocalSessions();
             LoadListCommandsXML();
+            TranslateAll();
 
             bool IsVersionPublished = TryGetEntryPointVersion(out string versionPublished);
 
@@ -124,6 +139,29 @@ namespace CommunicationProtocol
                 LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
             }
 
+        }
+
+        public void StartAllTypeLanguages()
+        {
+            try
+            {
+                List<Languages> ListLanguages = new List<Languages>()
+                {
+                    new Languages("English", "en-en"),
+                    new Languages("Spanish", "es-es"),
+                };
+
+                List<string> ListComboBox = new List<string>();
+                for (global::System.Int32 i = 0; i < ListLanguages.Count; i++)
+                {
+                    ListComboBox.Add(ListLanguages[i].Language);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void ShowNotification(string Message, string Tittle = "", bool Error = false)
@@ -1273,6 +1311,19 @@ namespace CommunicationProtocol
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             ShowNotification("Info button comming soon...");
+        }
+
+        private void TranslateAll()
+        {
+            try
+            {
+                LabelTittleAnswer.Content = translator.Translate("answer", "es-es");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
