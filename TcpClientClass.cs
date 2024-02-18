@@ -72,10 +72,14 @@ namespace CommunicationProtocol
                 if (bytesRead == 0)
                 {
                     Console.WriteLine("Server connection closed.");
+                    mainWindow.Dispatcher.Invoke(() => mainWindow.ConnectionTCPClientClosed());
+                    client.Close();
+
                     return;
                 }
 
                 string message = mainWindow.GetActualEncoding().GetString(buffer, 0, bytesRead);
+                message += "\n";
 
                 // Invocar el evento con el mensaje recibido
                 MessageReceived?.Invoke(this, new MessageReceivedEventArgs(message));

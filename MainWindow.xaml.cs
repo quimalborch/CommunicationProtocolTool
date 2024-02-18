@@ -1017,6 +1017,7 @@ namespace CommunicationProtocol
                     TextBoxContinuous.IsEnabled = true;
                     ButtonUpNumberContinuous.IsEnabled = true;
                     ButtonDownNumberContinuous.IsEnabled = true;
+                    ListBoxCommands.IsEnabled = true;
 
                 } else
                 {
@@ -1034,6 +1035,7 @@ namespace CommunicationProtocol
                     TextBoxContinuous.IsEnabled = false;
                     ButtonUpNumberContinuous.IsEnabled = false;
                     ButtonDownNumberContinuous.IsEnabled = false;
+                    ListBoxCommands.IsEnabled = false;
 
                     LoopConnections = new Thread(() => LoopConnectionsThread());
                     LoopConnections.Start();
@@ -1045,6 +1047,48 @@ namespace CommunicationProtocol
             {
                 TextBoxContentCommands.IsEnabled = true;
                 ShowNotification("Error starting continuous connections", "Communication Protocol Tool", true);
+            }
+        }
+
+        public void ConnectionTCPClientClosed()
+        {
+            try
+            {
+                ButtonConnectConnection.Content = "Connect";
+
+                ListComboProtocols.IsEnabled = true;
+                ButtonSendDataToSocket.IsEnabled = false;
+                ButtonLoopContinuousConnections.IsEnabled = false;
+                ButtonUpNumberContinuous.IsEnabled = false;
+                ButtonDownNumberContinuous.IsEnabled = false;
+                TextBoxContinuous.IsEnabled = false;
+
+                InputIPConnection.IsEnabled = true;
+                InputPORTConnection.IsEnabled = true;
+                //ListComboEncodings.IsEnabled = true;
+                ButtonLoadSession.IsEnabled = true;
+                TextStatusConnection.Content = "Server closed";
+
+                BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(100, 200, 108, 108));
+
+                tcpClientActive = false;
+
+                if (LoopConnections != null && LoopConnections.IsAlive)
+                {
+                    LoopConnections.Abort();
+                    ButtonLoopContinuousConnections.Content = "Continuous";
+
+                    TextBoxContentCommands.IsEnabled = true;
+                    ButtonSendDataToSocket.IsEnabled = true;
+                    TextBoxContinuous.IsEnabled = true;
+                    ButtonUpNumberContinuous.IsEnabled = true;
+                    ButtonDownNumberContinuous.IsEnabled = true;
+                    ListBoxCommands.IsEnabled = true;
+                }   
+            }
+            catch (Exception ex)
+            {
+                ShowNotification("Error stoping resource connections", "Communication Protocol Tool", true);
             }
         }
 
@@ -1074,10 +1118,18 @@ namespace CommunicationProtocol
                         InputPORTConnection.Dispatcher.Invoke(() => _InputPORTConnection = this.InputPORTConnection.Text);
 
                         //udpClient.SendMessage(_InputIPConnection, Int32.Parse(_InputPORTConnection), GetActualEncoding(), ContentCommands, this);
+                        udpSocket = new UdpSocket(_InputIPConnection, Int32.Parse(_InputPORTConnection));
+                        udpSocket.MessageReceived += UdpSocket_MessageReceived;
+
+                        // Iniciar un hilo o temporizador para recibir mensajes automáticamente
+                        // Puedes ajustar esto según tus necesidades
+                        Task.Run(() => ReceiveMessagesAutomatically());
+
+                        udpSocket.SendData(ContentCommands);
                     }
 
                     int TimeSleep = 1;
-                    TextBoxContinuous.Dispatcher.Invoke(() => TimeSleep = Int32.Parse(TextBoxContinuous.Text));
+                    //TextBoxContinuous.Dispatcher.Invoke(() => TimeSleep = Int32.Parse(TextBoxContinuous.Text));
                     Thread.Sleep(TimeSleep * 1000);
                 }
 

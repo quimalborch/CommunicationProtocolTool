@@ -15,6 +15,9 @@ public class UdpSocket
     {
         udpClient = new UdpClient();
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
+
+        this.ipAddress = ipAddress;
+        this.port = port;
     }
 
     public event EventHandler<string> MessageReceived;
@@ -36,7 +39,7 @@ public class UdpSocket
     {
         try
         {
-            IPEndPoint senderEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            IPEndPoint senderEndPoint = new IPEndPoint(IPAddress.Any, port);
             byte[] receivedData = udpClient.Receive(ref senderEndPoint);
             string message = Encoding.UTF8.GetString(receivedData);
 
