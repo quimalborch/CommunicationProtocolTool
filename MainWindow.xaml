@@ -531,7 +531,13 @@
         <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="HelpButton" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Background="{x:Null}" RenderTransformOrigin="0.503,0.708" Click="HelpButton_Click"/>
         <TextBox Style="{DynamicResource TextBoxSearchBoxListCommandsStyle}" x:Name="TextBoxSearchBoxListCommands" HorizontalAlignment="Left" Margin="31,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="20" TextChanged="TextBoxSearchBoxListCommands_TextChanged"/>
         <ListBox Style="{DynamicResource ListBoxCommandsStyle}" x:Name="ListBoxCommands" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,188,549,262" SelectionChanged="ListBoxCommands_SelectionChanged"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="662,-35,0,0" VerticalAlignment="Top" Height="30" Width="52"/>
+        <Button x:Name="ButtonLanguagContextMenu" Content="Button" HorizontalAlignment="Left" Margin="662,-35,0,0" VerticalAlignment="Top" Height="30" Width="52" Click="ButtonLanguagContextMenu_Click" Foreground="#FFFF1004" Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070"/>
+        <StackPanel x:Name="LanguageContextMenu" Margin="624,-5,86,456" Background="#FF0A003E">
+            <Grid  Height="100">
+                <Label Content="Español" Foreground="White" Margin="2,5,33,69"/>
+                <Image Source="/ES.png" Margin="57,10,10,74"/>
+            </Grid>
+        </StackPanel>
 
 
     </Grid>

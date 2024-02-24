@@ -141,7 +141,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CommunicationProtocol_TemporaryKey.pfx" />
-    <None Include="languages\es-es.json" />
+    <None Include="languages\es-es.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -171,7 +173,6 @@
     <Resource Include="ArrowUp.png" />
     <Resource Include="ArrowDown.png" />
     <Resource Include="help.png" />
-    <Resource Include="languages\es-es.json" />
     <Resource Include="commands\COUNTERS.xml" />
     <Resource Include="commands\DELETE_FORMAT.xml" />
     <Resource Include="commands\DOWNLOAD_IMAGE.xml" />
@@ -206,6 +207,12 @@
     <Resource Include="commands\Z_NICE_LABEL_LINE1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_QR1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_RECTANGLE1.xml" />
+    <Resource Include="languages\flagsIcons\ES.png" />
+    <Resource Include="ES.png" />
+    <Resource Include="languages\flagsIcons\FR.png" />
+    <Resource Include="languages\flagsIcons\IT.png" />
+    <Resource Include="languages\flagsIcons\NO.png" />
+    <Resource Include="languages\flagsIcons\US.png" />
     <Content Include="published\.gitattributes" />
     <Resource Include="resources\commands\x-svg-red.png" />
     <Resource Include="resources\commands\COUNTERS.xml" />
@@ -214,9 +221,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="commands\DELETE_FORMAT.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="languages\es-es.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="commands\DOWNLOAD_IMAGE.xml">

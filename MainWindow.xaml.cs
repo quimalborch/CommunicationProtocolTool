@@ -39,6 +39,7 @@ namespace CommunicationProtocol
         public MainWindow ActualInstance;
         public RootSessions ListSessions;
         private UdpSocket udpSocket;
+        private bool ContextMenuLanguageIsOpen;
         Translator translator = new Translator();
         Thread ThreadConnectionClientTCP;
         Thread LoopConnections;
@@ -1323,6 +1324,19 @@ namespace CommunicationProtocol
             {
 
                 throw;
+            }
+        }
+
+        private void ButtonLanguagContextMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (ContextMenuLanguageIsOpen)
+            {
+                LanguageContextMenu.Visibility = Visibility.Hidden;
+                ContextMenuLanguageIsOpen = false;
+            } else
+            {
+                LanguageContextMenu.Visibility = Visibility.Visible;
+                ContextMenuLanguageIsOpen = true;
             }
         }
     }
