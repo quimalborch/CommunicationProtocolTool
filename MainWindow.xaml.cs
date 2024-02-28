@@ -150,6 +150,30 @@ namespace CommunicationProtocol
                 {
                     new Languages("English", "en-en"),
                     new Languages("Spanish", "es-es"),
+                    new Languages("Portuguese", "pt-pt"),
+                    new Languages("French", "fr-fr"),
+                    new Languages("German", "de-de"),
+                    new Languages("Italian", "it-it"),
+                    new Languages("Russian", "ru-ru"),
+                    new Languages("Chinese", "zh-cn"),
+                    new Languages("Japanese", "ja-jp"),
+                    new Languages("Korean", "ko-kr"),
+                    new Languages("Arabic", "ar-sa"),
+                    new Languages("Hindi", "hi-in"),
+                    new Languages("Turkish", "tr-tr"),
+                    new Languages("Dutch", "nl-nl"),
+                    new Languages("Polish", "pl-pl"),
+                    new Languages("Swedish", "sv-se"),
+                    new Languages("Norwegian", "no-no"),
+                    new Languages("Danish", "da-dk"),
+                    new Languages("Finnish", "fi-fi"),
+                    new Languages("Greek", "el-gr"),
+                    new Languages("Czech", "cs-cz"),
+                    new Languages("Hungarian", "hu-hu"),
+                    new Languages("Romanian", "ro-ro"),
+                    new Languages("Thai", "th-th"),
+                    new Languages("Vietnamese", "vi-vn"),
+                    new Languages("Indonesian", "id-id"),
                 };
 
                 List<string> ListComboBox = new List<string>();
@@ -1314,11 +1338,11 @@ namespace CommunicationProtocol
             ShowNotification("Info button comming soon...");
         }
 
-        private void TranslateAll()
+        public void TranslateAll()
         {
             try
             {
-                LabelTittleAnswer.Content = translator.Translate("answer", "es-es");
+                LabelTittleAnswer.Content = translator.Translate("answer", translator.CurrentLanguage);
             }
             catch (Exception)
             {
@@ -1338,6 +1362,16 @@ namespace CommunicationProtocol
                 LanguageContextMenu.Visibility = Visibility.Visible;
                 ContextMenuLanguageIsOpen = true;
             }
+        }
+
+        private void ChangeLanguageUI_spanish(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "es-es");
+        }
+
+        private void ChangeLanguageUI_english(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "en-en");
         }
     }
 }

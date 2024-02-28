@@ -11,6 +11,7 @@ namespace CommunicationProtocol
     internal class Translator
     {
         private readonly Dictionary<string, Dictionary<string, string>> translations;
+        public string CurrentLanguage { get; private set; } = "es-es";
         public Translator()
         {
             translations = new Dictionary<string, Dictionary<string, string>>();
@@ -20,6 +21,31 @@ namespace CommunicationProtocol
             if (Directory.Exists(commandsFolderPath))
             {
                 LoadTranslations(commandsFolderPath);
+            }
+        }
+
+        public void ChangeLanguage(MainWindow argWindowm, string language)
+        {
+            // Cambia el idioma actual
+            if (translations.ContainsKey(language))
+            {
+                CurrentLanguage = language;
+                argWindowm.TranslateAll();
+                ChangeIconLanguage(argWindowm);
+            }
+        }
+
+        private void ChangeIconLanguage(MainWindow argWindowm)
+        {
+            try
+            {
+                ///languages/flagsIcons/ES.png
+                argWindowm.IconActualLanguage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "languages/flagsIcons/" + CurrentLanguage + ".png")));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 

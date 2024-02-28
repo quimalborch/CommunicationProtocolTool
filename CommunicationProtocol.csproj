@@ -141,6 +141,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CommunicationProtocol_TemporaryKey.pfx" />
+    <None Include="languages\en-en.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="languages\es-es.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -166,6 +169,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="US.png" />
     <Resource Include="x-svg.png" />
     <Resource Include="resources\x-svg.png" />
     <Resource Include="resources\x-svg-red.png" />
@@ -207,12 +211,26 @@
     <Resource Include="commands\Z_NICE_LABEL_LINE1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_QR1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_RECTANGLE1.xml" />
-    <Resource Include="languages\flagsIcons\ES.png" />
+    <None Include="languages\flagsIcons\es-es.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Resource Include="ES.png" />
-    <Resource Include="languages\flagsIcons\FR.png" />
-    <Resource Include="languages\flagsIcons\IT.png" />
-    <Resource Include="languages\flagsIcons\NO.png" />
-    <Resource Include="languages\flagsIcons\US.png" />
+    <None Include="languages\flagsIcons\fr-fr.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\flagsIcons\it-it.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\flagsIcons\no-no.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\flagsIcons\en-en.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="IT.png" />
+    <Resource Include="FR.png" />
+    <Resource Include="NO.png" />
+    <Resource Include="es-es.png" />
     <Content Include="published\.gitattributes" />
     <Resource Include="resources\commands\x-svg-red.png" />
     <Resource Include="resources\commands\COUNTERS.xml" />
