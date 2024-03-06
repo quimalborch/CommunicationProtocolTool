@@ -1341,46 +1341,27 @@ namespace CommunicationProtocol
         {
             try
             {
-                MessageBox.Show("Translate all");
-                MessageBox.Show("Translate 1");
-
-                MessageBox.Show(translator.CurrentLanguage);
-                MessageBox.Show(translator.Translate("answer", translator.CurrentLanguage));
-
                 LabelTittleAnswer.Content = translator.Translate("answer", translator.CurrentLanguage);
                 LabelCommands.Content = translator.Translate("commands", translator.CurrentLanguage);
-                MessageBox.Show("Translate 2");
-
                 LabelConnection.Content = translator.Translate("connection", translator.CurrentLanguage);
                 GroupBoxConnection.Header = translator.Translate("connection", translator.CurrentLanguage);
                 GroupBoxProtocol.Header = translator.Translate("protocol", translator.CurrentLanguage);
-                MessageBox.Show("Translate 3");
-
                 ButtonLoopContinuousConnections.Content = translator.Translate("continuous", translator.CurrentLanguage);
                 LabelSavedSessions.Content = translator.Translate("saved_sessions", translator.CurrentLanguage);
                 ButtonLoadSession.Content = translator.Translate("loadSession", translator.CurrentLanguage);
                 ButtonSaveSession.Content = translator.Translate("saveSession", translator.CurrentLanguage);
                 ButtonDeleteSession.Content = translator.Translate("deleteSession", translator.CurrentLanguage);
-                MessageBox.Show("Translate 4");
-
                 GroupBoxSessions.Header = translator.Translate("sessionsExplain", translator.CurrentLanguage);
                 LabelSessions.Content = translator.Translate("sessions", translator.CurrentLanguage);
                 ButtonConnectConnection.Content = translator.Translate("connect", translator.CurrentLanguage);
                 LabelConnectionPort.Content = translator.Translate("port", translator.CurrentLanguage);
                 LabelConnectionIP.Content = translator.Translate("ip", translator.CurrentLanguage);
-                MessageBox.Show("Translate 5");
-
                 ButtonSendDataToSocket.Content = translator.Translate("send", translator.CurrentLanguage);
                 LabelProtocol.Content = translator.Translate("protocol", translator.CurrentLanguage);
                 GroupBoxEncoding.Content = translator.Translate("encoding", translator.CurrentLanguage);
-                MessageBox.Show("Translate 6");
-
                 LabelTimeSecs.Content = translator.Translate("LabelTimeSecs", translator.CurrentLanguage);
 
-                MessageBox.Show("Translate 7");
-
                 translator.ChangeIconLanguage(this);
-                MessageBox.Show("Translate 8");
             }
             catch (Exception ex)
             {

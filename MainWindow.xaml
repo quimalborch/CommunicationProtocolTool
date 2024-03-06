@@ -531,30 +531,30 @@
         <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="HelpButton" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Background="{x:Null}" RenderTransformOrigin="0.503,0.708" Click="HelpButton_Click"/>
         <TextBox Style="{DynamicResource TextBoxSearchBoxListCommandsStyle}" x:Name="TextBoxSearchBoxListCommands" HorizontalAlignment="Left" Margin="31,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="20" TextChanged="TextBoxSearchBoxListCommands_TextChanged"/>
         <ListBox Style="{DynamicResource ListBoxCommandsStyle}" x:Name="ListBoxCommands" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,188,549,262" SelectionChanged="ListBoxCommands_SelectionChanged"/>
-        <StackPanel x:Name="LanguageContextMenu" Margin="602,-5,76,387" Background="#FF0A003E" MinWidth="100" MaxWidth="300" Visibility="Hidden">
+        <StackPanel x:Name="LanguageContextMenu" Margin="602,-5,76,387" Background="#FF0A003E" MinWidth="100" MaxWidth="300" Visibility="Visible">
             <Grid Height="26">
                 <Label Content="Español" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="62"/>
-                <Image Source="/ES.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
+                <Image Source="/languages/flagsIcons/es-es.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
                 <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_spanish"/>
             </Grid>
             <Grid Height="26">
                 <Label Content="English" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="60"/>
-                <Image Source="/US.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
+                <Image Source="/languages/flagsIcons/en-en.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
                 <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_english"></Button>
             </Grid>
             <Grid Height="26">
                 <Label Content="Italiano" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="62"/>
-                <Image Source="/IT.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
+                <Image Source="/languages/flagsIcons/it-it.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
                 <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_italiano"></Button>
             </Grid>
             <Grid Height="26">
                 <Label Content="French" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="59"/>
-                <Image Source="/FR.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
+                <Image Source="/languages/flagsIcons/fr-fr.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
                 <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_french"></Button>
             </Grid>
             <Grid Height="26">
                 <Label Content="Norwegian" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="81"/>
-                <Image Source="/NO.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
+                <Image Source="/languages/flagsIcons/no-no.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
                 <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_norwegian"></Button>
             </Grid>
         </StackPanel>
