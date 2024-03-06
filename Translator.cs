@@ -121,21 +121,39 @@ namespace CommunicationProtocol
 
         public string Translate(string key, string language)
         {
-            // Asegúrate de que el idioma proporcionado esté cargado
-            if (!translations.ContainsKey(language))
+            try
             {
-                argPrincipalWindow.ShowNotification("Idioma no cargado", "Communication Protocol Tool", true);
-                throw new ArgumentException("Idioma no cargado", nameof(language));
+                MessageBox.Show("Translate AT: 1");
+                // Asegúrate de que el idioma proporcionado esté cargado
+                if (!translations.ContainsKey(language))
+                {
+                    MessageBox.Show("Translate AT: 2");
+
+                    argPrincipalWindow.ShowNotification("Idioma no cargado", "Communication Protocol Tool", true);
+                    MessageBox.Show("Translate AT: 2/5");
+
+                    throw new ArgumentException("Idioma no cargado", nameof(language));
+                }
+
+                MessageBox.Show("Translate AT: 3");
+
+
+                // Obtiene el diccionario de traducciones correspondiente al idioma
+                var translationDict = translations[language];
+                MessageBox.Show("Translate AT: 4");
+
+                // Obtiene la traducción utilizando la clave proporcionada
+                var translation = translationDict.TryGetValue(key, out var value) ? value : null;
+                MessageBox.Show("Translate AT: 5");
+
+                // Devuelve la traducción o la clave si no se encuentra la traducción
+                return translation ?? key;
             }
-
-            // Obtiene el diccionario de traducciones correspondiente al idioma
-            var translationDict = translations[language];
-
-            // Obtiene la traducción utilizando la clave proporcionada
-            var translation = translationDict.TryGetValue(key, out var value) ? value : null;
-
-            // Devuelve la traducción o la clave si no se encuentra la traducción
-            return translation ?? key;
+            catch (Exception ex)
+            {
+                argPrincipalWindow.ShowNotification("Error selecting command: " + ex.Message, "Communication Protocol Tool", true);
+                return key;
+            }
         }
     }
 }
