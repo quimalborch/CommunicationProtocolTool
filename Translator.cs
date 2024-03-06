@@ -123,13 +123,10 @@ namespace CommunicationProtocol
         {
             try
             {
-                MessageBox.Show("Translate AT: 1");
                 // Asegúrate de que el idioma proporcionado esté cargado
                 if (!translations.ContainsKey(language))
                 {
                     argPrincipalWindow.ShowNotification("Idioma no cargado", "Communication Protocol Tool", true);
-                    MessageBox.Show("Translate AT: 2/5");
-
                     throw new ArgumentException("Idioma no cargado", nameof(language));
                 }
 
