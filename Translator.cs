@@ -23,6 +23,8 @@ namespace CommunicationProtocol
             {
                 LoadTranslations(commandsFolderPath);
             }
+
+            
         }
 
         public static string GetLanguageToSystem()
@@ -71,10 +73,11 @@ namespace CommunicationProtocol
                 ChangeIconLanguage(argWindowm);
 
                 SaveLanguageToSystem();
+                argPrincipalWindow.LanguageContextMenu.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 
-        private void ChangeIconLanguage(MainWindow argWindowm)
+        public void ChangeIconLanguage(MainWindow argWindowm)
         {
             try
             {

@@ -465,19 +465,19 @@
             </Border>
         </Border>
         <GroupBox x:Name="GroupBoxConnection" Header="Connection" Margin="34,38,548,0" Height="72" VerticalAlignment="Top">
-            <Label Content="IP Address" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+            <Label x:Name="LabelConnectionIP" Content="IP Address" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
         </GroupBox>
         <TextBox x:Name="InputIPConnection" HorizontalAlignment="Left" Margin="115,61,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="17" VerticalAlignment="Top"/>
-        <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Port" Margin="41,82,0,0"/>
+        <Label x:Name="LabelConnectionPort" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Port" Margin="41,82,0,0"/>
         <TextBox x:Name="InputPORTConnection" HorizontalAlignment="Left" Margin="115,87,0,0" TextWrapping="Wrap" Width="120" BorderThickness="0,0,0,1" Height="16" VerticalAlignment="Top"/>
-        <GroupBox Header="Encoding" Margin="259,38,350,0" Height="72" VerticalAlignment="Top">
-            <Label Content="Encoding" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+        <GroupBox x:Name="GroupBoxEncoding" Header="Encoding" Margin="259,38,350,0" Height="72" VerticalAlignment="Top">
+            <Label Content="Encoding" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="72" RenderTransformOrigin="0.757,0.502" Margin="-3,0,0,0"/>
         </GroupBox>
-        <ComboBox x:Name="ListComboEncodings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Margin="331,60,0,0"/>
+        <ComboBox x:Name="ListComboEncodings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="336,60,0,0"/>
         <GroupBox x:Name="GroupBoxProtocol" Header="Protocol" Margin="458,38,184,0" Height="72" VerticalAlignment="Top">
-            <Label Content="Protocol" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502"/>
+            <Label x:Name="LabelProtocol" Content="Protocol" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="72" RenderTransformOrigin="0.757,0.502" Margin="-2,0,0,0"/>
         </GroupBox>
-        <ComboBox x:Name="ListComboProtocols" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="522,59,0,0" SelectionChanged="ListComboProtocolsChanged"/>
+        <ComboBox x:Name="ListComboProtocols" HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Margin="525,59,0,0" SelectionChanged="ListComboProtocolsChanged"/>
         <Rectangle Margin="0,-35,0,0" Stroke="#FF0A003E" HorizontalAlignment="Center" Width="800" Height="30" VerticalAlignment="Top" Fill="#FF0A003E" MouseDown="Rectangle_MouseDown"/>
         <Label Content="Communication Protocol Tool" Margin="25,-33,0,0" Height="31" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="175"/>
         <Button x:Name="ButtonConnectConnection" Style="{DynamicResource ButtonPlayPause}" Content="Connect" HorizontalAlignment="Left" Margin="626,82,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonConnectConnection_Click"/>
@@ -507,12 +507,12 @@
         </Border>
         <Border BorderBrush="Black" BorderThickness="1" Margin="530,274,26,0" CornerRadius="8,8,8,8" Height="199" VerticalAlignment="Top">
             <Border BorderBrush="Black" BorderThickness="1" Margin="-1,-1,0,0" CornerRadius="8,0,8,0" Background="#FF0A003E" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="104">
-                <Label Content="Sessions" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
+                <Label x:Name="LabelSessions" Content="Sessions" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
         <Image HorizontalAlignment="Left" Height="18" Margin="7,-29,0,0" VerticalAlignment="Top" Width="18" Source="/logo.ico"/>
-        <GroupBox Header="Load, save or delete a stored sessions" Margin="537,308,35,50"/>
-        <Label Content="Saved Sessions" HorizontalAlignment="Left" Margin="542,324,0,0" VerticalAlignment="Top" Height="27"/>
+        <GroupBox x:Name="GroupBoxSessions" Header="Load, save or delete a stored sessions" Margin="537,308,35,50"/>
+        <Label x:Name="LabelSavedSessions" Content="Saved Sessions" HorizontalAlignment="Left" Margin="542,324,0,0" VerticalAlignment="Top" Height="27"/>
         <TextBox x:Name="TextBoxNameSavedSession" HorizontalAlignment="Left" Margin="545,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" MouseDown="TextBoxNameSavedSession_MouseDown" MouseLeftButtonUp="TextBoxNameSavedSession_MouseLeftButtonUp"/>
         <Button x:Name="ButtonLoadSession" Content="Load" Margin="687,373,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White" Click="ButtonLoadSession_Click"/>
         <Button x:Name="ButtonSaveSession" Content="Save" Margin="687,402,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="72" Style="{DynamicResource ButtonPlayPause}" Background="#FF0A003E" Foreground="White" Click="ButtonSaveSession_Click"/>
@@ -526,12 +526,12 @@
         <Button Style="{DynamicResource ButtonUpDownContinuousStyle}" x:Name="ButtonUpNumberContinuous" Content="" HorizontalAlignment="Left" Margin="685,169,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="Transparent" Foreground="White" Click="ButtonUpNumberContinuous_Click" IsEnabled="False"/>
         <Image HorizontalAlignment="Left" Height="5" Margin="691,186,0,0" VerticalAlignment="Top" Width="8" Source="/ArrowDown.png"/>
         <Button Style="{DynamicResource ButtonUpDownContinuousDownStyle}" x:Name="ButtonDownNumberContinuous" Content="" HorizontalAlignment="Left" Margin="685,182,0,0" VerticalAlignment="Top" Height="13" Width="20" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="Transparent" Foreground="White" Click="ButtonDownNumberContinuous_Click" IsEnabled="False"/>
-        <Label Content="secs." HorizontalAlignment="Left" Margin="707,180,0,0" VerticalAlignment="Top" Width="54" Height="22" FontSize="9"/>
+        <Label x:Name="LabelTimeSecs" Content="secs." HorizontalAlignment="Left" Margin="707,180,0,0" VerticalAlignment="Top" Width="54" Height="22" FontSize="9"/>
         <Image HorizontalAlignment="Left" Height="25" Margin="720,-33,0,0" VerticalAlignment="Top" Width="26" Source="/help.png"/>
         <Button Style="{DynamicResource ButtonCloseAppStyle}" x:Name="HelpButton" Content="" HorizontalAlignment="Left" Margin="711,-35,0,520" Width="44" BorderBrush="#00FF0606" Background="{x:Null}" RenderTransformOrigin="0.503,0.708" Click="HelpButton_Click"/>
         <TextBox Style="{DynamicResource TextBoxSearchBoxListCommandsStyle}" x:Name="TextBoxSearchBoxListCommands" HorizontalAlignment="Left" Margin="31,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="20" TextChanged="TextBoxSearchBoxListCommands_TextChanged"/>
         <ListBox Style="{DynamicResource ListBoxCommandsStyle}" x:Name="ListBoxCommands" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,188,549,262" SelectionChanged="ListBoxCommands_SelectionChanged"/>
-        <StackPanel x:Name="LanguageContextMenu" Margin="602,-5,76,387" Background="#FF0A003E" MinWidth="100" MaxWidth="300">
+        <StackPanel x:Name="LanguageContextMenu" Margin="602,-5,76,387" Background="#FF0A003E" MinWidth="100" MaxWidth="300" Visibility="Hidden">
             <Grid Height="26">
                 <Label Content="Español" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="62"/>
                 <Image Source="/ES.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
