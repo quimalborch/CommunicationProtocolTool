@@ -119,44 +119,27 @@ namespace CommunicationProtocol
 
         public MainWindow()
         {
-            MessageBox.Show("1");
             ActualInstance = this;
             InitializeComponent();
-            MessageBox.Show("2");
-
 
             StartAllTypeEncodings();
             StartAllTypeLanguages();
-            MessageBox.Show("3");
-
             StartAllTypeProtocol();
             StartAllComponent();
-            MessageBox.Show("4");
-
             StartLocalSessions();
             LoadListCommandsXML();
-            MessageBox.Show("5");
 
             TranslateAll();
-
-            MessageBox.Show("6");
 
 
             bool IsVersionPublished = TryGetEntryPointVersion(out string versionPublished);
 
-
-            MessageBox.Show("7");
-
             if (IsVersionPublished)
             {
-                MessageBox.Show("8");
-
                 LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", versionPublished);
             } else
             {
                 LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
-                MessageBox.Show("9");
-
             }
 
         }
@@ -1383,8 +1366,7 @@ namespace CommunicationProtocol
             }
             catch (Exception)
             {
-
-                throw;
+                ShowNotification("Error translating UI", "Communication Protocol Tool", true);
             }
         }
 
