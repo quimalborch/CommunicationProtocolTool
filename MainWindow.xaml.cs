@@ -119,15 +119,24 @@ namespace CommunicationProtocol
 
         public MainWindow()
         {
+            MessageBox.Show("1");
             ActualInstance = this;
             InitializeComponent();
+            MessageBox.Show("2");
+
 
             StartAllTypeEncodings();
             StartAllTypeLanguages();
+            MessageBox.Show("3");
+
             StartAllTypeProtocol();
             StartAllComponent();
+            MessageBox.Show("4");
+
             StartLocalSessions();
             LoadListCommandsXML();
+            MessageBox.Show("5");
+
             TranslateAll();
 
             bool IsVersionPublished = TryGetEntryPointVersion(out string versionPublished);

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CommunicationProtocol
 {
@@ -15,35 +16,47 @@ namespace CommunicationProtocol
         private MainWindow argPrincipalWindow;
         public Translator()
         {
+            MessageBox.Show("Tr_1");
             translations = new Dictionary<string, Dictionary<string, string>>();
 
             // Carga las traducciones desde archivos JSON en la carpeta especificada
             string commandsFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "languages");
             if (Directory.Exists(commandsFolderPath))
             {
+                MessageBox.Show("Tr_2");
+
                 LoadTranslations(commandsFolderPath);
             }
 
-            
+            MessageBox.Show("Tr_3");
         }
 
         public static string GetLanguageToSystem()
         {
             try
             {
+                MessageBox.Show("Tr_EP_1");
                 //get file with the current language
                 string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "languages", "language.json");
+                MessageBox.Show("Tr_EP_2");
+
                 if (File.Exists(path))
                 {
+                    MessageBox.Show("Tr_EP_3");
+
                     return JsonConvert.DeserializeObject<string>(File.ReadAllText(path));
                 }
                 else
                 {
+                    MessageBox.Show("Tr_EP_4");
+
                     return "es-es";
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Tr_EP_5");
+
                 return "es-es";
             }
         }
