@@ -11,7 +11,8 @@ namespace CommunicationProtocol
     internal class Translator
     {
         private readonly Dictionary<string, Dictionary<string, string>> translations;
-        public string CurrentLanguage { get; private set; } = "es-es";
+        public string CurrentLanguage { get; private set; } = GetLanguageToSystem();
+        private MainWindow argPrincipalWindow;
         public Translator()
         {
             translations = new Dictionary<string, Dictionary<string, string>>();
@@ -24,14 +25,52 @@ namespace CommunicationProtocol
             }
         }
 
+        public static string GetLanguageToSystem()
+        {
+            try
+            {
+                //get file with the current language
+                string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "languages", "language.json");
+                if (File.Exists(path))
+                {
+                    return JsonConvert.DeserializeObject<string>(File.ReadAllText(path));
+                }
+                else
+                {
+                    return "es-es";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "es-es";
+            }
+        }
+
+        public void SaveLanguageToSystem()
+        {
+            try
+            {
+                //save file with the current language
+                string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "languages", "language.json");
+                File.WriteAllText(path, JsonConvert.SerializeObject(CurrentLanguage));
+            }
+            catch (Exception ex)
+            {
+                argPrincipalWindow.ShowNotification("Error selecting command: " + ex.Message, "Communication Protocol Tool", true);
+            }
+        }
+
         public void ChangeLanguage(MainWindow argWindowm, string language)
         {
             // Cambia el idioma actual
             if (translations.ContainsKey(language))
             {
                 CurrentLanguage = language;
+                argPrincipalWindow = argWindowm;
                 argWindowm.TranslateAll();
                 ChangeIconLanguage(argWindowm);
+
+                SaveLanguageToSystem();
             }
         }
 
@@ -44,8 +83,7 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-
-                throw;
+                argPrincipalWindow.ShowNotification("Error selecting command: " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 

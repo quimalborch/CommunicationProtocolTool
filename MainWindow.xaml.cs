@@ -294,7 +294,7 @@ namespace CommunicationProtocol
         }
 
         private void AttemptToConnectTCPAnimation()
-        {
+        { 
             try
             {
                 while (true)
@@ -1343,6 +1343,11 @@ namespace CommunicationProtocol
             try
             {
                 LabelTittleAnswer.Content = translator.Translate("answer", translator.CurrentLanguage);
+                LabelCommands.Content = translator.Translate("commands", translator.CurrentLanguage);
+                LabelConnection.Content = translator.Translate("connection", translator.CurrentLanguage);
+                GroupBoxConnection.Header = translator.Translate("connection", translator.CurrentLanguage);
+                GroupBoxProtocol.Header = translator.Translate("protocol", translator.CurrentLanguage);
+                ButtonLoopContinuousConnections.Content = translator.Translate("continuous", translator.CurrentLanguage);
             }
             catch (Exception)
             {
