@@ -139,14 +139,24 @@ namespace CommunicationProtocol
 
             TranslateAll();
 
+            MessageBox.Show("6");
+
+
             bool IsVersionPublished = TryGetEntryPointVersion(out string versionPublished);
+
+
+            MessageBox.Show("7");
 
             if (IsVersionPublished)
             {
+                MessageBox.Show("8");
+
                 LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", versionPublished);
             } else
             {
                 LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+                MessageBox.Show("9");
+
             }
 
         }
