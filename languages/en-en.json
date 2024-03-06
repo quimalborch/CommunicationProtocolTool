@@ -4,6 +4,7 @@
   "connection": "Connection",
   "protocol": "Protocol",
   "continuous": "Continuous",
+  "continuous_active": "🛑 Continuous",
   "saved_sessions": "Saved Sessions",
   "loadSession": "Load",
   "saveSession": "Save",
@@ -32,5 +33,6 @@
   "error_input_connection": "The connection could not be started due to the following reasons",
   "error_port_empty": "The port cannot be empty.",
   "error_port_format": "The selected port is not in a valid format.",
-  "error_ip_format": "The selected IP is not in a valid format."
+  "error_ip_format": "The selected IP is not in a valid format.",
+  "language_not_found": "language not found"
 }

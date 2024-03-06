@@ -74,6 +74,9 @@ namespace CommunicationProtocol
 
                 SaveLanguageToSystem();
                 argPrincipalWindow.LanguageContextMenu.Visibility = System.Windows.Visibility.Hidden;
+            } else
+            {
+                argWindowm.ShowNotification(language + " " + Translate("language_not_found", CurrentLanguage), "Communication Protocol Tool", true);
             }
         }
 

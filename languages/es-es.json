@@ -4,6 +4,7 @@
   "connection": "Conexión",
   "protocol": "Protocolo",
   "continuous": "Continuo",
+  "continuous_active": "🛑 Continuo",
   "saved_sessions": "Sesiones Guardadas",
   "loadSession": "Cargar",
   "saveSession": "Guardar",
@@ -32,5 +33,6 @@
   "error_input_connection": "La conexión no pudo iniciarse debido a las siguientes razones",
   "error_port_empty": "El puerto no puede estar vacío.",
   "error_port_format": "El formato del puerto seleccionado no es válido.",
-  "error_ip_format": "El formato de la IP seleccionada no es válido."
+  "error_ip_format": "El formato de la IP seleccionada no es válido.",
+  "language_not_found": "idioma no encontrado"
 }

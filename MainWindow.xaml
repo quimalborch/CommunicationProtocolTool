@@ -545,17 +545,17 @@
             <Grid Height="26">
                 <Label Content="Italiano" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="62"/>
                 <Image Source="/IT.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
-                <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070"></Button>
+                <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_italiano"></Button>
             </Grid>
             <Grid Height="26">
                 <Label Content="French" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="59"/>
                 <Image Source="/FR.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
-                <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070"></Button>
+                <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_french"></Button>
             </Grid>
             <Grid Height="26">
                 <Label Content="Norwegian" Foreground="White" Margin="0,0,38,0" HorizontalAlignment="Right" Width="81"/>
                 <Image Source="/NO.png" Margin="0,3,12,3" HorizontalAlignment="Right" Width="30"/>
-                <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070"></Button>
+                <Button Style="{DynamicResource ButtonCloseAppStyle}" Background="#00DDDDDD" BorderBrush="#00707070" Click="ChangeLanguageUI_norwegian"></Button>
             </Grid>
         </StackPanel>
         <Image x:Name="IconActualLanguage" HorizontalAlignment="Left" Height="16" Margin="678,-28,0,0" VerticalAlignment="Top" Width="24" Source="/es-es.png"/>

@@ -1157,7 +1157,7 @@ namespace CommunicationProtocol
         {
             try
             {
-                ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.Content = "🛑 Continuous");
+                ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.Content = translator.Translate("continuous_active", translator.CurrentLanguage));
 
                 while (true)
                 {
@@ -1390,6 +1390,21 @@ namespace CommunicationProtocol
         private void ChangeLanguageUI_english(object sender, RoutedEventArgs e)
         {
             translator.ChangeLanguage(this, "en-en");
+        }
+
+        private void ChangeLanguageUI_italiano(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "it-it");
+        }
+
+        private void ChangeLanguageUI_french(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "fr-fr");
+        }
+
+        private void ChangeLanguageUI_norwegian(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "no-no");
         }
     }
 }
