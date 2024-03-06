@@ -124,6 +124,7 @@ namespace CommunicationProtocol
             // Asegúrate de que el idioma proporcionado esté cargado
             if (!translations.ContainsKey(language))
             {
+                argPrincipalWindow.ShowNotification("Idioma no cargado", "Communication Protocol Tool", true);
                 throw new ArgumentException("Idioma no cargado", nameof(language));
             }
 
