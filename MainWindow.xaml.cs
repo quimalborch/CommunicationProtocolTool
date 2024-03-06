@@ -39,6 +39,8 @@ namespace CommunicationProtocol
         public MainWindow ActualInstance;
         public RootSessions ListSessions;
         private UdpSocket udpSocket;
+        private bool ContextMenuLanguageIsOpen;
+        Translator translator = new Translator();
         Thread ThreadConnectionClientTCP;
         Thread LoopConnections;
 
@@ -76,6 +78,18 @@ namespace CommunicationProtocol
         }
         #endregion
 
+        public class Languages
+        {
+            public string Language { get; set; }
+            public string Code { get; set; }
+
+            public Languages(string language, string code)
+            {
+                Language = language;
+                Code = code;
+            }
+        }
+
         public class EncodingInfo
         {
             public string Name { get; set; }
@@ -109,10 +123,12 @@ namespace CommunicationProtocol
             InitializeComponent();
 
             StartAllTypeEncodings();
+            StartAllTypeLanguages();
             StartAllTypeProtocol();
             StartAllComponent();
             StartLocalSessions();
             LoadListCommandsXML();
+            TranslateAll();
 
             bool IsVersionPublished = TryGetEntryPointVersion(out string versionPublished);
 
@@ -124,6 +140,53 @@ namespace CommunicationProtocol
                 LabelVersionCommunicationProtocol.Content = string.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
             }
 
+        }
+
+        public void StartAllTypeLanguages()
+        {
+            try
+            {
+                List<Languages> ListLanguages = new List<Languages>()
+                {
+                    new Languages("English", "en-en"),
+                    new Languages("Spanish", "es-es"),
+                    new Languages("Portuguese", "pt-pt"),
+                    new Languages("French", "fr-fr"),
+                    new Languages("German", "de-de"),
+                    new Languages("Italian", "it-it"),
+                    new Languages("Russian", "ru-ru"),
+                    new Languages("Chinese", "zh-cn"),
+                    new Languages("Japanese", "ja-jp"),
+                    new Languages("Korean", "ko-kr"),
+                    new Languages("Arabic", "ar-sa"),
+                    new Languages("Hindi", "hi-in"),
+                    new Languages("Turkish", "tr-tr"),
+                    new Languages("Dutch", "nl-nl"),
+                    new Languages("Polish", "pl-pl"),
+                    new Languages("Swedish", "sv-se"),
+                    new Languages("Norwegian", "no-no"),
+                    new Languages("Danish", "da-dk"),
+                    new Languages("Finnish", "fi-fi"),
+                    new Languages("Greek", "el-gr"),
+                    new Languages("Czech", "cs-cz"),
+                    new Languages("Hungarian", "hu-hu"),
+                    new Languages("Romanian", "ro-ro"),
+                    new Languages("Thai", "th-th"),
+                    new Languages("Vietnamese", "vi-vn"),
+                    new Languages("Indonesian", "id-id"),
+                };
+
+                List<string> ListComboBox = new List<string>();
+                for (global::System.Int32 i = 0; i < ListLanguages.Count; i++)
+                {
+                    ListComboBox.Add(ListLanguages[i].Language);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void ShowNotification(string Message, string Tittle = "", bool Error = false)
@@ -156,7 +219,7 @@ namespace CommunicationProtocol
                     ListBoxCommands.ItemsSource = ListCommands;
                 } else
                 {
-                    ShowNotification("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool", true);
+                    ShowNotification(translator.Translate("commandFolder404", translator.CurrentLanguage), "Communication Protocol Tool", true);
                 }
             }
             catch (Exception)
@@ -216,7 +279,7 @@ namespace CommunicationProtocol
                     InputPORTConnection.IsEnabled = true;
                     //ListComboEncodings.IsEnabled = true;
                     ButtonLoadSession.IsEnabled = true;
-                    TextStatusConnection.Content = "Disconnected";
+                    TextStatusConnection.Content = translator.Translate("disconnected", translator.CurrentLanguage);
 
                     BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
@@ -225,24 +288,24 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                ShowNotification("Connection failed: " + ex.Message, "Communication Protocol Tool - Button Connect", true);
+                ShowNotification(translator.Translate("connection_failed", translator.CurrentLanguage) + ": " + ex.Message, "Communication Protocol Tool - Button Connect", true);
             }
 
         }
 
         private void AttemptToConnectTCPAnimation()
-        {
+        { 
             try
             {
                 while (true)
                 {
-                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting.");
-                    Thread.Sleep(250);
-                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting..");
-                    Thread.Sleep(250);
-                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting...");
-                    Thread.Sleep(250);
-                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connecting....");
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("connecting", translator.CurrentLanguage) + ".");
+                    Thread.Sleep(250);                                                          
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("connecting", translator.CurrentLanguage) + "..");
+                    Thread.Sleep(250);                                                          
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("connecting", translator.CurrentLanguage) + "...");
+                    Thread.Sleep(250);                                                          
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("connecting", translator.CurrentLanguage) + "....");
                     Thread.Sleep(250);
                 }
             }
@@ -277,8 +340,8 @@ namespace CommunicationProtocol
 
                     tcpClientActive = true;
 
-                    ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.Content = "🛑 Disconnect");
-                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "Connected");
+                    ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.Content = translator.Translate("disconnect", translator.CurrentLanguage));
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("connected", translator.CurrentLanguage));
 
                     ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = false);
                     ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = true);
@@ -307,7 +370,7 @@ namespace CommunicationProtocol
                     InputIPConnection.Dispatcher.Invoke(() => InputIPConnection.IsEnabled = true);
                     ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = true);
                     InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = true);
-                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = "⚠ Disconnected");
+                    TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("disconnected_warning", translator.CurrentLanguage));
 
 
                     BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(100 ,200, 108, 108)));
@@ -315,7 +378,7 @@ namespace CommunicationProtocol
             }
             catch (Exception)
             {
-                ShowNotification("Connection failed", "Communication Protocol Tool - Client Thread", true);
+                ShowNotification(translator.Translate("connection_failed", translator.CurrentLanguage), "Communication Protocol Tool - Client Thread", true);
             }
         }
 
@@ -328,7 +391,7 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                ShowNotification("Error receiving message: " + ex.Message, "Communication Protocol Tool", true);
+                ShowNotification(translator.Translate("error_reciving_message", translator.CurrentLanguage) + ": " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -423,22 +486,22 @@ namespace CommunicationProtocol
 
                 if (!IsValidIP(ipAddress))
                 {
-                    MessageErrors.Add("La IP seleccionada no está en un formato valido.");
+                    MessageErrors.Add(translator.Translate("error_ip_format", translator.CurrentLanguage));
                 }
 
                 if (!IsValidPort(inputPort))
                 {
                     if (inputPort != String.Empty)
                     {
-                        MessageErrors.Add("El puerto seleccionado no está en un formato valido.");
+                        MessageErrors.Add(translator.Translate("error_port_format", translator.CurrentLanguage));
                     }
                     else
                     {
-                        MessageErrors.Add("El puerto no puede estar vacio.");
+                        MessageErrors.Add(translator.Translate("error_port_empty", translator.CurrentLanguage));
                     }
                 }
 
-                string StringMessageBox = "No se ha podido iniciar la conexión devido a los siguientes motivos: \n";
+                string StringMessageBox = translator.Translate("error_input_connection", translator.CurrentLanguage) + ": \n";
 
                 for (Int32 i = 0; i < MessageErrors.Count; i++)
                 {
@@ -518,8 +581,6 @@ namespace CommunicationProtocol
 
                             break;
                         default:
-                            Console.WriteLine("Looking forward to the Weekend.");
-
                             break;
                     }
 
@@ -590,7 +651,7 @@ namespace CommunicationProtocol
             }
             catch (Exception ex)
             {
-                ShowNotification("Error sending data: " + ex.Message, "Communication Protocol Tool", true);
+                ShowNotification(translator.Translate("error_sending_data", translator.CurrentLanguage) + ": " + ex.Message, "Communication Protocol Tool", true);
             }
         }
 
@@ -1054,7 +1115,7 @@ namespace CommunicationProtocol
         {
             try
             {
-                ButtonConnectConnection.Content = "Connect";
+                ButtonConnectConnection.Content = translator.Translate("connect", translator.CurrentLanguage);
 
                 ListComboProtocols.IsEnabled = true;
                 ButtonSendDataToSocket.IsEnabled = false;
@@ -1067,7 +1128,7 @@ namespace CommunicationProtocol
                 InputPORTConnection.IsEnabled = true;
                 //ListComboEncodings.IsEnabled = true;
                 ButtonLoadSession.IsEnabled = true;
-                TextStatusConnection.Content = "Server closed";
+                TextStatusConnection.Content = translator.Translate("server_closed", translator.CurrentLanguage);
 
                 BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(100, 200, 108, 108));
 
@@ -1076,7 +1137,7 @@ namespace CommunicationProtocol
                 if (LoopConnections != null && LoopConnections.IsAlive)
                 {
                     LoopConnections.Abort();
-                    ButtonLoopContinuousConnections.Content = "Continuous";
+                    ButtonLoopContinuousConnections.Content = translator.Translate("continuous", translator.CurrentLanguage);
 
                     TextBoxContentCommands.IsEnabled = true;
                     ButtonSendDataToSocket.IsEnabled = true;
@@ -1096,7 +1157,7 @@ namespace CommunicationProtocol
         {
             try
             {
-                ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.Content = "🛑 Continuous");
+                ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.Content = translator.Translate("continuous_active", translator.CurrentLanguage));
 
                 while (true)
                 {
@@ -1225,7 +1286,7 @@ namespace CommunicationProtocol
                     ListBoxCommands.ItemsSource = ListCommandsFiltered;
                 } else
                 {
-                    ShowNotification("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool", true);
+                    ShowNotification(translator.Translate("commandFolder404", translator.CurrentLanguage), "Communication Protocol Tool", true);
                 }
 
             }
@@ -1260,7 +1321,7 @@ namespace CommunicationProtocol
                     TextBoxContentCommands.Text = fileText;
                 } else
                 {
-                    ShowNotification("The commands folder does not exist, please create it and add the commands in xml format.", "Communication Protocol Tool", true);
+                    ShowNotification(translator.Translate("commandFolder404", translator.CurrentLanguage), "Communication Protocol Tool", true);
                 }
 
             }
@@ -1273,6 +1334,77 @@ namespace CommunicationProtocol
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             ShowNotification("Info button comming soon...");
+        }
+
+        public void TranslateAll()
+        {
+            try
+            {
+                LabelTittleAnswer.Content = translator.Translate("answer", translator.CurrentLanguage);
+                LabelCommands.Content = translator.Translate("commands", translator.CurrentLanguage);
+                LabelConnection.Content = translator.Translate("connection", translator.CurrentLanguage);
+                GroupBoxConnection.Header = translator.Translate("connection", translator.CurrentLanguage);
+                GroupBoxProtocol.Header = translator.Translate("protocol", translator.CurrentLanguage);
+                ButtonLoopContinuousConnections.Content = translator.Translate("continuous", translator.CurrentLanguage);
+                LabelSavedSessions.Content = translator.Translate("saved_sessions", translator.CurrentLanguage);
+                ButtonLoadSession.Content = translator.Translate("loadSession", translator.CurrentLanguage);
+                ButtonSaveSession.Content = translator.Translate("saveSession", translator.CurrentLanguage);
+                ButtonDeleteSession.Content = translator.Translate("deleteSession", translator.CurrentLanguage);
+                GroupBoxSessions.Header = translator.Translate("sessionsExplain", translator.CurrentLanguage);
+                LabelSessions.Content = translator.Translate("sessions", translator.CurrentLanguage);
+                ButtonConnectConnection.Content = translator.Translate("connect", translator.CurrentLanguage);
+                LabelConnectionPort.Content = translator.Translate("port", translator.CurrentLanguage);
+                LabelConnectionIP.Content = translator.Translate("ip", translator.CurrentLanguage);
+                ButtonSendDataToSocket.Content = translator.Translate("send", translator.CurrentLanguage);
+                LabelProtocol.Content = translator.Translate("protocol", translator.CurrentLanguage);
+                GroupBoxEncoding.Content = translator.Translate("encoding", translator.CurrentLanguage);
+                LabelTimeSecs.Content = translator.Translate("LabelTimeSecs", translator.CurrentLanguage);
+
+                translator.ChangeIconLanguage(this);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void ButtonLanguagContextMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (ContextMenuLanguageIsOpen)
+            {
+                LanguageContextMenu.Visibility = Visibility.Hidden;
+                ContextMenuLanguageIsOpen = false;
+            } else
+            {
+                LanguageContextMenu.Visibility = Visibility.Visible;
+                ContextMenuLanguageIsOpen = true;
+            }
+        }
+
+        private void ChangeLanguageUI_spanish(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "es-es");
+        }
+
+        private void ChangeLanguageUI_english(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "en-en");
+        }
+
+        private void ChangeLanguageUI_italiano(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "it-it");
+        }
+
+        private void ChangeLanguageUI_french(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "fr-fr");
+        }
+
+        private void ChangeLanguageUI_norwegian(object sender, RoutedEventArgs e)
+        {
+            translator.ChangeLanguage(this, "no-no");
         }
     }
 }

@@ -32,7 +32,7 @@
     <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -103,6 +103,7 @@
       <DependentUpon>NotifyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TcpClientClass.cs" />
+    <Compile Include="Translator.cs" />
     <Compile Include="UdpSocket.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +141,21 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CommunicationProtocol_TemporaryKey.pfx" />
+    <None Include="languages\en-en.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\es-es.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\fr-fr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\it-it.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\no-no.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,6 +178,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="US.png" />
     <Resource Include="x-svg.png" />
     <Resource Include="resources\x-svg.png" />
     <Resource Include="resources\x-svg-red.png" />
@@ -203,6 +220,26 @@
     <Resource Include="commands\Z_NICE_LABEL_LINE1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_QR1.xml" />
     <Resource Include="commands\Z_NICE_LABEL_RECTANGLE1.xml" />
+    <None Include="languages\flagsIcons\es-es.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="ES.png" />
+    <None Include="languages\flagsIcons\fr-fr.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\flagsIcons\it-it.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\flagsIcons\no-no.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="languages\flagsIcons\en-en.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="IT.png" />
+    <Resource Include="FR.png" />
+    <Resource Include="NO.png" />
+    <Resource Include="es-es.png" />
     <Content Include="published\.gitattributes" />
     <Resource Include="resources\commands\x-svg-red.png" />
     <Resource Include="resources\commands\COUNTERS.xml" />
