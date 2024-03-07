@@ -479,7 +479,7 @@
         </GroupBox>
         <ComboBox x:Name="ListComboProtocols" HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Margin="525,59,0,0" SelectionChanged="ListComboProtocolsChanged"/>
         <Rectangle Margin="0,-35,0,0" Stroke="#FF0A003E" HorizontalAlignment="Center" Width="800" Height="30" VerticalAlignment="Top" Fill="#FF0A003E" MouseDown="Rectangle_MouseDown"/>
-        <Label Content="Communication Protocol Tool" Margin="25,-33,0,0" Height="31" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="175"/>
+        <Label x:Name="TittleNavbar" Content="Communication Protocol Tool" Margin="25,-33,0,0" Height="31" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" Width="175" MouseDown="TittleNavbar_MouseDown"/>
         <Button x:Name="ButtonConnectConnection" Style="{DynamicResource ButtonPlayPause}" Content="Connect" HorizontalAlignment="Left" Margin="626,82,0,0" VerticalAlignment="Top" Width="134" BorderThickness="0,0,0,0" Height="27" Background="#FF0A003E" Foreground="White" Click="ButtonConnectConnection_Click"/>
         <Border x:Name="BorderTextStatusConnection" BorderBrush="Black" BorderThickness="1" Margin="626,47,40,0" CornerRadius="3,3,3,3" Height="30" VerticalAlignment="Top" Background="#4CFFFFFF">
             <Label x:Name="TextStatusConnection" Content="Disconnected" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -510,7 +510,7 @@
                 <Label x:Name="LabelSessions" Content="Sessions" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,-1,-1"/>
             </Border>
         </Border>
-        <Image HorizontalAlignment="Left" Height="18" Margin="7,-29,0,0" VerticalAlignment="Top" Width="18" Source="/logo.ico"/>
+        <Image x:Name="IconNavbar" HorizontalAlignment="Left" Height="18" Margin="7,-29,0,0" VerticalAlignment="Top" Width="18" Source="/logo.ico" MouseDown="IconNavbar_MouseDown"/>
         <GroupBox x:Name="GroupBoxSessions" Header="Load, save or delete a stored sessions" Margin="537,308,35,50"/>
         <Label x:Name="LabelSavedSessions" Content="Saved Sessions" HorizontalAlignment="Left" Margin="542,324,0,0" VerticalAlignment="Top" Height="27"/>
         <TextBox x:Name="TextBoxNameSavedSession" HorizontalAlignment="Left" Margin="545,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" MouseDown="TextBoxNameSavedSession_MouseDown" MouseLeftButtonUp="TextBoxNameSavedSession_MouseLeftButtonUp"/>

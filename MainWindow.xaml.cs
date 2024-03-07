@@ -1406,5 +1406,35 @@ namespace CommunicationProtocol
         {
             translator.ChangeLanguage(this, "no-no");
         }
+
+        private void TittleNavbar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowNotification("Error moving window: " + ex.Message, "Communication Protocol Tool", true);
+            }
+        }
+
+        private void IconNavbar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowNotification("Error moving window: " + ex.Message, "Communication Protocol Tool", true);
+            }
+        }
     }
 }
