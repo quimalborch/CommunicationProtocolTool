@@ -62,6 +62,7 @@ namespace CommunicationProtocol
             public string PORT { get; set; }
             public string ENCODING { get; set; }
             public string Protocol { get; set; }
+            public bool Headers { get; set; }
         }
 
         public class RootSessions
@@ -275,6 +276,7 @@ namespace CommunicationProtocol
                     ButtonUpNumberContinuous.IsEnabled = false;
                     ButtonDownNumberContinuous.IsEnabled = false;
                     TextBoxContinuous.IsEnabled = false;
+                    CheckBoxHeaders.IsEnabled = true;
 
                     InputIPConnection.IsEnabled = true;
                     InputPORTConnection.IsEnabled = true;
@@ -327,6 +329,7 @@ namespace CommunicationProtocol
                 InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = false);
                 ListComboProtocols.Dispatcher.Invoke(() => ListComboProtocols.IsEnabled = false);
                 ButtonConnectConnection.Dispatcher.Invoke(() => ButtonConnectConnection.IsEnabled = false);
+                CheckBoxHeaders.Dispatcher.Invoke(() => CheckBoxHeaders.IsEnabled = false);
                 //ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = false);
 
                 Thread ThreadAttemptToConnectTCPAnimation = new Thread(() => AttemptToConnectTCPAnimation());
@@ -350,7 +353,6 @@ namespace CommunicationProtocol
                     ButtonLoopContinuousConnections.Dispatcher.Invoke(() => ButtonLoopContinuousConnections.IsEnabled = true);
                     ButtonUpNumberContinuous.Dispatcher.Invoke(() => ButtonUpNumberContinuous.IsEnabled = true);
                     ButtonDownNumberContinuous.Dispatcher.Invoke(() => ButtonDownNumberContinuous.IsEnabled = true);
-                    TextBoxContinuous.Dispatcher.Invoke(() => TextBoxContinuous.IsEnabled = true);
 
                     //rgba 230, 255, 0, 30%
                     BorderTextStatusConnection.Dispatcher.Invoke(() => BorderTextStatusConnection.Background = new SolidColorBrush(Color.FromArgb(50, 230, 250, 0)));
@@ -370,6 +372,7 @@ namespace CommunicationProtocol
                     //ListComboEncodings.Dispatcher.Invoke(() => ListComboEncodings.IsEnabled = true);
                     InputIPConnection.Dispatcher.Invoke(() => InputIPConnection.IsEnabled = true);
                     ButtonLoadSession.Dispatcher.Invoke(() => ButtonLoadSession.IsEnabled = true);
+                    CheckBoxHeaders.Dispatcher.Invoke(() => CheckBoxHeaders.IsEnabled = true);
                     InputPORTConnection.Dispatcher.Invoke(() => InputPORTConnection.IsEnabled = true);
                     TextStatusConnection.Dispatcher.Invoke(() => TextStatusConnection.Content = translator.Translate("disconnected_warning", translator.CurrentLanguage));
 
@@ -569,6 +572,7 @@ namespace CommunicationProtocol
                             ButtonUpNumberContinuous.IsEnabled = false;
                             ButtonDownNumberContinuous.IsEnabled = false;
                             TextBoxContinuous.IsEnabled = false;
+                            CheckBoxHeaders.IsEnabled = true;
 
                             break;
                         case "UDP":
@@ -579,6 +583,7 @@ namespace CommunicationProtocol
                             ButtonUpNumberContinuous.IsEnabled = true;
                             ButtonDownNumberContinuous.IsEnabled = true;
                             TextBoxContinuous.IsEnabled = true;
+                            CheckBoxHeaders.IsEnabled = false;
 
                             break;
                         default:
@@ -742,6 +747,7 @@ namespace CommunicationProtocol
 
                 Session.Connection.IP = InputIPConnection.Text;
                 Session.Connection.PORT = InputPORTConnection.Text;
+                Session.Connection.Headers = CheckBoxHeaders.IsChecked.Value;
 
 
                 string Encoding = String.Empty;
@@ -820,7 +826,8 @@ namespace CommunicationProtocol
                     IP = InputIPConnection.Text,
                     PORT = InputPORTConnection.Text,
                     ENCODING = Encoding,
-                    Protocol = Protocol
+                    Protocol = Protocol,
+                    Headers = CheckBoxHeaders.IsChecked.Value
                 }
             });
             
@@ -936,6 +943,7 @@ namespace CommunicationProtocol
                 TextBoxRecivedInformation.Text = Session.Answer.AnswerTextBox;
                 InputIPConnection.Text = Session.Connection.IP;
                 InputPORTConnection.Text = Session.Connection.PORT;
+                CheckBoxHeaders.IsChecked = Session.Connection.Headers;
 
                 if (ListComboEncodings.Items.Contains(Session.Connection.ENCODING))
                 {
@@ -1124,6 +1132,7 @@ namespace CommunicationProtocol
                 ButtonUpNumberContinuous.IsEnabled = false;
                 ButtonDownNumberContinuous.IsEnabled = false;
                 TextBoxContinuous.IsEnabled = false;
+                CheckBoxHeaders.IsEnabled = true;
 
                 InputIPConnection.IsEnabled = true;
                 InputPORTConnection.IsEnabled = true;
@@ -1143,6 +1152,7 @@ namespace CommunicationProtocol
                     TextBoxContentCommands.IsEnabled = true;
                     ButtonSendDataToSocket.IsEnabled = true;
                     TextBoxContinuous.IsEnabled = true;
+                    CheckBoxHeaders.IsEnabled = true;
                     ButtonUpNumberContinuous.IsEnabled = true;
                     ButtonDownNumberContinuous.IsEnabled = true;
                     ListBoxCommands.IsEnabled = true;
