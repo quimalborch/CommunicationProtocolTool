@@ -186,8 +186,6 @@
     <Resource Include="ArrowUp.png" />
     <Resource Include="ArrowDown.png" />
     <Resource Include="help.png" />
-    <Resource Include="languages\es-es.json" />
-    <Resource Include="languages\en-en.json" />
     <Resource Include="commands\COUNTERS.xml" />
     <Resource Include="commands\DELETE_FORMAT.xml" />
     <Resource Include="commands\DOWNLOAD_IMAGE.xml" />

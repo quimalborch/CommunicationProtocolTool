@@ -1358,7 +1358,7 @@ namespace CommunicationProtocol
                 LabelConnectionIP.Content = translator.Translate("ip", translator.CurrentLanguage);
                 ButtonSendDataToSocket.Content = translator.Translate("send", translator.CurrentLanguage);
                 LabelProtocol.Content = translator.Translate("protocol", translator.CurrentLanguage);
-                GroupBoxEncoding.Content = translator.Translate("encoding", translator.CurrentLanguage);
+                GroupBoxEncoding.Header = translator.Translate("encoding", translator.CurrentLanguage);
                 LabelTimeSecs.Content = translator.Translate("LabelTimeSecs", translator.CurrentLanguage);
 
                 translator.ChangeIconLanguage(this);
