@@ -96,7 +96,7 @@ namespace CommunicationProtocol
             {
                 if (SendHeaders)
                 {
-                    message = $"{(char)0x27}{(char)0x01}{(char)0x27}{(char)0x02}{message}{(char)0x27}{(char)0x03}";
+                    message = $"{(char)0x27}{(char)0x01}{(char)0x27}{(char)0x02}{message}{(char)0x27}{(char)0x03}{(char)0x27}{(char)0x04}";
                 }
 
                 byte[] data = mainWindow.GetActualEncoding().GetBytes(message);
