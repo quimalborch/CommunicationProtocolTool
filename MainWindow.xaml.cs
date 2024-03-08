@@ -432,8 +432,11 @@ namespace CommunicationProtocol
                 Encodings = new List<EncodingInfo>()
                 {
                     new EncodingInfo("ASCII", System.Text.Encoding.ASCII),
-                    new EncodingInfo("UTF-8", System.Text.Encoding.UTF8),
                     new EncodingInfo("UNICODE", System.Text.Encoding.Unicode),
+                    new EncodingInfo("UTF-8", System.Text.Encoding.UTF8),
+                    new EncodingInfo("UTF-7", System.Text.Encoding.UTF7),
+                    new EncodingInfo("UTF-32", System.Text.Encoding.UTF32),
+                    new EncodingInfo("BIG-ENDIAN UNICODE", System.Text.Encoding.BigEndianUnicode),
                 };
 
 
