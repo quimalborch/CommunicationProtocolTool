@@ -90,10 +90,15 @@ namespace CommunicationProtocol
             }
         }
 
-        public void SendMessage(string message)
+        public void SendMessage(string message, bool SendHeaders = false)
         {
             try
             {
+                if (SendHeaders)
+                {
+                    message = $"{(char)0x27}{(char)0x01}{(char)0x27}{(char)0x02}{message}{(char)0x27}{(char)0x03}";
+                }
+
                 byte[] data = mainWindow.GetActualEncoding().GetBytes(message);
                 stream.Write(data, 0, data.Length);
             }

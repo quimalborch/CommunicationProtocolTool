@@ -638,7 +638,14 @@ namespace CommunicationProtocol
                 {
                     if (tcpClientActive)
                     {
-                        tcpServer.SendMessage(TextBoxContentCommands.Text);
+                        if (CheckBoxHeaders.IsChecked.Value)
+                        {
+                            tcpServer.SendMessage(TextBoxContentCommands.Text, true);
+                        }
+                        else
+                        {
+                            tcpServer.SendMessage(TextBoxContentCommands.Text);
+                        }
                     }
                 }
             
